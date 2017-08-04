@@ -48,6 +48,7 @@ modify package.json:
   },  
 ```
 git init
+curl -u 'robsterpsz' https://api.github.com/user/repos -d '{"name":"al-test"}'
 git remote add origin https://github.com/robsterpz/al-test.git
 git remote -v
 touch .gitignore
