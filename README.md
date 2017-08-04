@@ -48,9 +48,13 @@ modify package.json:
   },  
 ```
 git init
+git remote add origin https://github.com/robsterpz/al-test.git
+git remote -v
 touch .gitignore
 modify .gitignore:
 ```bash
 # Dependency directories
 node_modules
 ```
+git status
+git add .
