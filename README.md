@@ -57,6 +57,8 @@ curl -u 'robsterpsz' https://api.github.com/user/repos -d '{"name":"al-test"}'
 git remote add origin git@github.com:robsterpsz/al-test.git
 git remote -v
 touch .gitignore
+```
+
 modify .gitignore:
 ```javascript
 # Dependency directories
