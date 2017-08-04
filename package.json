@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js --exec babel-node --presets es2015,stage-2",
-    "start": "node ./index",
+    "start": "babel-node index.js --presets es2015,stage-2",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robsterpsz/al-test.git"
+  },
+  "engines": {
+    "node": "6.11.0"
   },
   "keywords": [
     "testing",
@@ -35,6 +38,7 @@
     "redis": "^2.7.1"
   },
   "dependencies": {
+    "foreman": "2.0.0",
     "socket.io": "^2.0.3"
   }
 }
