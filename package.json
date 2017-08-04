@@ -8,7 +8,6 @@
     "start": "nodemon src/index.js --exec babel-node",
     "build": "babel src -d dist",
     "serve": "node dist/index.js",
-    "postinstall": "npm run build",
     "test": "mocha --compilers js:babel-register"
   },
   "repository": {
