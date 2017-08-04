@@ -28,6 +28,7 @@ npm run start
 ```
 
 #### Development CLI History
+```bash
 mkdir altest
 cd altest
 npm init
@@ -36,6 +37,8 @@ npm install --save socket-io
 npm install --save-dev babel-cli
 npm install --save-dev babel-preset-es2015 babel-preset-stage-2
 npm install --save-dev nodemon
+```
+
 modify package.json:
 ```javascript
   "scripts": {
@@ -47,17 +50,22 @@ modify package.json:
     "url": "git+https://github.com/robsterpsz/al-test.git"
   },  
 ```
+
+```bash
 git init
 curl -u 'robsterpsz' https://api.github.com/user/repos -d '{"name":"al-test"}'
 git remote add origin git@github.com:robsterpsz/al-test.git
 git remote -v
 touch .gitignore
 modify .gitignore:
-```bash
+```javascript
 # Dependency directories
 node_modules
 ```
+
+```bash
 git status
 git add .
 git commit -m "initial commit"
 git push origin master
+```
