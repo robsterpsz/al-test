@@ -4,7 +4,7 @@
   "description": "AL task made for testing purposes",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js --exec babel-node",
+    "dev": "nodemon src/index.js --exec babel-node",
     "start": "nodemon src/index.js --exec babel-node",
     "build": "babel src -d dist",
     "serve": "node ./dist/index.js",
