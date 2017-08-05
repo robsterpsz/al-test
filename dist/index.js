@@ -114,14 +114,17 @@ var intervalProvider = function intervalProvider() {
 
 // Tiny cache for stocks -> to avoid dupes basically
 var stocksRefCache = null;
-redisClient.hget('__STOCK_CONTROL__', 'REF_CACHE', function (err, refCache) {
-  if (err) console.error('Redis error:', err);
-  stocksRefCache = refCache;
-  console.log('stocksRefCache:', stocksRefCache);
-  // Once we are ready, we set the requesting clock and start requesting stock data asap
-  getStocksFromApiRef = intervalProvider();
-  getStocksFromApi();
-});
+try {
+  redisClient.hget('__STOCK_CONTROL__', 'REF_CACHE', function (err, refCache) {
+    if (err) throw new Error('Redis service error:', err);
+    stocksRefCache = refCache;
+    console.log('stocksRefCache:', stocksRefCache);
+    // Once we are ready, we set the requesting clock and start requesting stock data asap
+    getStocksFromApiRef = intervalProvider();
+  });
+} catch (e) {
+  console.error(e);
+}
 
 var errorSimulation = function errorSimulation() {
   // La API debera simular un 10% rate de errores usando el siguiente codigo:
