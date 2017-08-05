@@ -203,9 +203,9 @@ var getStocksFromApi = function () {
 
             // Se debera capturar SOLAMENTE este error para los reintentos
             if (/unfortunate/.test(_context.t0)) {
-              console.log('Simulated Error: Retrying in 3 seconds...');
+              console.log('Simulated Error: Retrying in 30 seconds...');
               apiIsWorking = marketIsOpen ? false : true;
-              intervalProvider(3 * 1000);
+              intervalProvider(30 * 1000);
             }
             // si existe otro error (ej: se cayo el api) debera manejarse de otra manera
             // (informandole al usuario la ultima actualizacion, que no existe conexion con el api, etc).
