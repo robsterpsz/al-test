@@ -100,16 +100,13 @@ var get = function get(url) {
 
 // Timer manager for requesting data
 // By default we will request stock data from Google API every 1 minute
-// 'Ref' suffix is an implicit self-convention to link names between a var name and its target function
-// kind of a trick to avoid any uncontrolled timer
 var getStocksFromApiRef = null;
 var intervalProvider = function intervalProvider() {
   var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 60 * 1000;
-  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : getStocksFromApi;
 
-  console.log('Requesting time set to: ' + time + ' ms for: ' + fn.name);
-  clearInterval(fn.name + 'Ref');
-  setInterval(fn, time);
+  console.log('Requesting time set to: ' + time + ' ms for: getStocksFromApi');
+  clearInterval(getStocksFromApiRef);
+  return setInterval(getStocksFromApi, time);
 };
 
 // Tiny cache for stocks -> to avoid dupes basically
