@@ -109,7 +109,7 @@ const getStocksFromApi = async (stockNames = ['AAPL','ABC','MSFT','TSLA','F']) =
     apiIsWorking = false;
     // TODO: Refactor this... I'm thinking about discarding timer till next working day,
     // but I'm not sure about holidays and such, so i will keep asking every 8 hours though
-    intervalProvider(8 * 60 * 1000);
+    intervalProvider(8 * 60 * 60 * 1000);
     // TODO: informar la usuario que no se va a actualizar mas hasta la proxima apertura.
   } else if (marketIsOpen && !apiIsWorking) {
     console.log('market is opening, increasing stocks fetching frequency to 1 minute');
