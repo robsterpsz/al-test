@@ -1,5 +1,21 @@
 'use strict';
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _promise = require('babel-runtime/core-js/promise');
+
+var _promise2 = _interopRequireDefault(_promise);
+
 var _http = require('http');
 
 var _http2 = _interopRequireDefault(_http);
@@ -13,8 +29,6 @@ var _redis = require('redis');
 var _redis2 = _interopRequireDefault(_redis);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 // redis stuff
 var redisClient = _redis2.default.createClient();
@@ -44,7 +58,7 @@ server.on('connection', function (err, socket) {
 
 // promise to gather (very similar to) json content from an url
 var get = function get(url) {
-  return new Promise(function (resolve, reject) {
+  return new _promise2.default(function (resolve, reject) {
     _http2.default.get(url, function (res) {
       var statusCode = res.statusCode;
 
@@ -114,10 +128,10 @@ var errorSimulation = function errorSimulation() {
 
 var apiIsWorking = true;
 var getStocksFromApi = function () {
-  var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+  var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
     var stockNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ['AAPL', 'ABC', 'MSFT', 'TSLA', 'F'];
     var openingHour, openingDay, marketIsOpen, url, stocks, hashedStocks, unixTime;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -166,7 +180,7 @@ var getStocksFromApi = function () {
               stocks.forEach(function (stock, i) {
                 var redisData = new Array();
                 var redisKey = unixTime + ':' + stockNames[i];
-                Object.keys(stock).forEach(function (key) {
+                (0, _keys2.default)(stock).forEach(function (key) {
                   redisData.push(key, stock[key]);
                 });
                 console.log(redisKey);
