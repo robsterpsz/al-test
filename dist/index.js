@@ -31,7 +31,9 @@ var _redis2 = _interopRequireDefault(_redis);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // redis stuff
-var redisClient = _redis2.default.createClient();
+var redisPort = process.env.REDIS_PORT || 6379;
+var redisHost = process.env.REDIS_HOST || '127.0.0.1';
+var redisClient = _redis2.default.createClient(redisPort, redisHost);
 redisClient.on("error", function (err) {
   console.log("redisClient Error:", err);
 });
@@ -149,7 +151,7 @@ var getStocksFromApi = function () {
               apiIsWorking = false;
               // TODO: Refactor this... I'm thinking about discarding timer till next working day,
               // but I'm not sure about holidays and such, so i will keep asking every 8 hours though
-              intervalProvider(8 * 60 * 1000);
+              intervalProvider(8 * 60 * 60 * 1000);
               // TODO: informar la usuario que no se va a actualizar mas hasta la proxima apertura.
             } else if (marketIsOpen && !apiIsWorking) {
               console.log('market is opening, increasing stocks fetching frequency to 1 minute');

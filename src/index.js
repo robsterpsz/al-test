@@ -3,7 +3,9 @@ import md5 from 'md5';
 import redis  from 'redis';
 
 // redis stuff
-const redisClient = redis.createClient();
+const redisPort = process.env.REDIS_PORT || 6379;
+const redisHost = process.env.REDIS_HOST || '127.0.0.1';
+const redisClient = redis.createClient(redisPort, redisHost);
 redisClient.on("error", function (err) {
     console.log("redisClient Error:", err);
 });
