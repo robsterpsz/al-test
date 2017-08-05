@@ -7,7 +7,6 @@
     "dev": "nodemon src/index.js --exec babel-node",
     "start": "nodemon src/index.js --exec babel-node",
     "build": "babel src -d dist",
-    "serve": "node ./dist/index.js",
     "test": "mocha --compilers js:babel-register"
   },
   "repository": {
@@ -43,6 +42,7 @@
   },
   "dependencies": {
     "foreman": "2.0.0",
+    "md5": "2.2.1",
     "socket.io": "^2.0.3"
   }
 }
