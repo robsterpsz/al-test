@@ -5,6 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "build:client": "npm run clean && NODE_ENV=\"production\" webpack",
+    "build:dev-client": "npm run clean && webpack",
     "build:server": "BABEL_ENV=node babel src -d dist",
     "check": "NODE_ENV=\"production\" webpack-dev-server",
     "clean": "rm -rf ./public",

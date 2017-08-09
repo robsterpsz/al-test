@@ -31,7 +31,9 @@ export default class Stocks extends Component {
     super();
     this.feedClick = this.feedClick.bind(this);
 
-    socket = io('http://localhost:8080');
+    const port = process.env.PORT || 8080
+
+    socket = io('http://localhost:' + port);
 
     socket.on('newStock', data => {
       const { dispatch, feedStock } = this.props;
@@ -86,7 +88,7 @@ export default class Stocks extends Component {
         const tradeMarket = stock.e;
 
         stockBlock.push(
-            <h3 key={stock.id}>{stockName} [{tradeMarket}] USD {stock.l}&nbsp;
+            <h3 key={stock.id}>{stockName} [{tradeMarket}] USD {stock.l}
                 <NavLink
                   activeClassName='Button-link--active'
                   className='Button-link'
