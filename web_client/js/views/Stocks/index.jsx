@@ -31,11 +31,7 @@ export default class Stocks extends Component {
     super();
     this.feedClick = this.feedClick.bind(this);
 
-    const url = process.env.NODE_URL || 'http://localhost'
-    const port = process.env.PORT || 8080
-    const endpoint = [url, port].join(':');
-
-    socket = io(endpoint);
+    socket = io();
 
     socket.on('newStock', data => {
       const { dispatch, feedStock } = this.props;
