@@ -1,2 +1,13 @@
 # Dependency directories
 node_modules
+
+# WDS & HMR stuff
+.build
+
+# Linux dir data
+.directory
+
+# Heroku recommends
+npm-debug.log
+.DS_Store
+/*.env
