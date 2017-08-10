@@ -1,20 +1,21 @@
+import History from '../History/index.jsx';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { feedError, feedStart, feedSuccess, newStock } from 'actions/app';
+import { feedError, feedSuccess, feedStart, newStock, setProp } from 'actions/app';
 import { NavLink } from 'react-router-dom';
 import { routeCodes } from '../../config/routes.jsx';
-import { toJS } from 'immutable';
 
+// TODO: To be handled by middleware
 let socket;
 
 @connect(state => ({
-  feedError: state.app.get('feedError'),
-  feedLoading: state.app.get('feedLoading'),
-  feedStock: state.app.get('feedStock'),
-  newStock: state.app.get('newStock'),
-  selectedStock: state.app.get('selectedStock')
+  feedError: state.app.feedError,
+  feedLoading: state.app.feedLoading,
+  feedStock: state.app.feedStock,
+  newStock: state.app.newStock,
+  selectedStock: state.app.selectedStock
 }))
 
 export default class Stocks extends Component {
@@ -29,22 +30,28 @@ export default class Stocks extends Component {
 
   constructor() {
     super();
-    this.feedClick = this.feedClick.bind(this);
+    this.setPropClick = this.setPropClick.bind(this);
 
     socket = io();
 
     socket.on('newStock', data => {
-      const { dispatch, feedStock } = this.props;
-      let updateData = {};
-      const feed = feedStock.toJS();
-      const stocks = JSON.parse(data.updateData).map((stock) => {
-        const stockName = stock.t;
-        const len = Object.keys(feed[stockName]).length;
-        updateData[stockName] = {[len]: stock}
-      });
-
-      dispatch(newStock(data, updateData));
+      const { dispatch } = this.props;
+      dispatch(newStock(data));
     });
+  }
+
+  componentDidMount() {
+    if (!this.props.newStock) {
+      socket.emit('sendStock');
+    }
+  }
+
+  componentWillUnmount() {
+     socket.disconnect()
+  }
+
+  setPropClick(key, value) {
+    socket.emit('feedStart', value);
 
     socket.on('feedError', error => {
       const { dispatch } = this.props;
@@ -54,24 +61,17 @@ export default class Stocks extends Component {
     socket.on('feedSuccess', data => {
       const { dispatch } = this.props;
       dispatch(feedSuccess(data));
+      dispatch(setProp(key, value))
     });
   }
 
-  componentWillUnmount() {
-     socket.disconnect()
-  }
-
-  feedClick(stockName) {
-    const { dispatch } = this.props;
-    dispatch(feedStart(socket, stockName));
-  }
-
   render() {
-    const { feedError, feedLoading, newStock, selectedStock } = this.props;
+    const { newStock, selectedStock } = this.props;
 
     let message = 'Opening soon. Stay tuned.';
     let isOpen = '';
     let stockBlock = new Array();
+    let history = '';
 
     if (newStock) {
 
@@ -80,23 +80,30 @@ export default class Stocks extends Component {
       const lastUpdate = new Date(unixTime * 1000);
       message = `Last Update: ${lastUpdate.toLocaleString()}`;
 
-      const stocks = JSON.parse(newStock.updateData);
-      stocks.forEach(stock => {
-        const stockName = stock.t;
-        const tradeMarket = stock.e;
+      if (selectedStock) {
 
-        stockBlock.push(
-            <h3 key={stock.id}>{stockName} [{tradeMarket}] USD {stock.l}
-                <NavLink
-                  activeClassName='Button-link--active'
+        history = <History selectedStock={selectedStock} socket={socket} />;
+
+      } else {
+
+        const stocks = JSON.parse(newStock.updateData);
+        stocks.forEach(stock => {
+          const stockName = stock.t;
+          const tradeMarket = stock.e;
+          const price = stock.l;
+
+          stockBlock.push(
+              <h3 key={stock.id}>{stockName} [{tradeMarket}] USD {price}
+                <button
                   className='Button-link'
-                  to={ routeCodes.HISTORY }
+                  onTouchTap={ () => this.setPropClick('selectedStock', stockName) }
                 >
                   History
-                </NavLink>
-            </h3>
-          );
-      });
+                </button>
+              </h3>
+            );
+        });
+      }
 
     }
 
@@ -108,6 +115,7 @@ export default class Stocks extends Component {
         </p>
         <hr />
         <div>{stockBlock}</div>
+        {history}
       </div>
     );
   }

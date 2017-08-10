@@ -3,6 +3,7 @@ export const FEED_ERROR = 'FEED_ERROR';
 export const FEED_START = 'FEED_START';
 export const FEED_SUCCESS = 'FEED_SUCCESS';
 export const NEW_STOCK = 'NEW_STOCK';
+export const SET_PROP = 'SET_PROP';
 export const UPDATE_STOCK = 'UPDATE_STOCK';
 
 export function addControl(data) {
@@ -34,13 +35,21 @@ export function feedSuccess(data) {
   };
 }
 
-export function newStock(data, updateData) {
+export function newStock(data) {
   return (dispatch) => {
+    JSON.parse(data.updateData).forEach((updateData) => {
+      const key = updateData.t;
+      dispatch(updateStock(updateData, key));
+    });
     dispatch(addControl(data));
-    Object.keys(updateData).forEach(
-      (key)=> {
-        dispatch(updateStock(updateData[key], key));
-      });
+  };
+}
+
+export function setProp(key, value) {
+  return {
+    type: SET_PROP,
+    key,
+    value
   };
 }
 

@@ -286,8 +286,17 @@ const io = new SocketIO(server);
 io.on('connection', (socket) => {
   console.log('CONNECTION');
 
-  // feed immediately to newcomers
-  io.emit('newStock', stockControl);
+  // TODO: Implement some dummy data ?
+  // TODO: set-up some react middleware
+  // border case: empty db -> choose not to control
+  socket.on('sendStockTest', () => {
+    console.log('send(first)Stock ONCE');
+      io.emit('newStock', stockControl);
+  });
+  socket.once('sendStock', () => {
+    console.log('send(first)Stock ONCE');
+      io.emit('newStock', stockControl);
+  });
 
   // feed immediately when new stock arrives from Api
   eventEmitter.on('newStock', (stockControl) => {
