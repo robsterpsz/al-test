@@ -23,14 +23,6 @@ function connect() {
 function subscribe(socket) {
   return eventChannel(emit => {
 
-    const stockAdd = (data) => {
-      const stocksData = {
-        'lastStocks': JSON.parse(data.lastStocks),
-        'lastUpdate': parseInt(data.lastUpdate, 10)
-      };
-      emit(addStock(stocksData));
-    };
-
     socket.on('stock:init', (data) => {
       const lastStocks = JSON.parse(data.lastStocks);
       const stocks = new Object();
@@ -43,7 +35,13 @@ function subscribe(socket) {
       emit(initStock(initData));
     });
 
-    socket.on('stock:add', stockAdd);
+    socket.on('stock:add', (data) => {
+      const stocksData = {
+        'lastStocks': JSON.parse(data.lastStocks),
+        'lastUpdate': parseInt(data.lastUpdate, 10)
+      };
+      emit(addStock(stocksData));
+    });
 
     socket.on('close', () => {
       emit(setProp('marketIsOpen', false));
