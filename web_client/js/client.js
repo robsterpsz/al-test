@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import 'babel-polyfill';
 
 import configureStore from 'config/store';
-import Client from 'views/Client';
+import Client from 'components/Client';
 
 //import es6Promise from 'es6-promise';
 //import 'isomorphic-fetch';
@@ -36,8 +36,8 @@ const render = Component => {
 render(Client);
 
 if (module.hot) {
-  module.hot.accept('./views/Client/', () => {
-    const NewClient = require('./views/Client/index').default; // eslint-disable-line global-require
+  module.hot.accept('./components/Client/', () => {
+    const NewClient = require('./components/Client/index').default; // eslint-disable-line global-require
 
     render(NewClient);
   });

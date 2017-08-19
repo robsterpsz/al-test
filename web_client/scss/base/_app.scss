@@ -4,6 +4,7 @@ $font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $grey-border: #eee;
 $grey-text: #aaa;
 $black: #000;
+$red: #ff0000;
 $white: #fff;
 
 html {
@@ -62,6 +63,12 @@ h3 {
   font-size: 1.7rem;
 }
 
+hr {
+  border: 0;
+  border-top: 1px solid $grey-border;
+  margin: 2rem 0;
+}
+
 button {
   background: transparent;
   border-radius: 1.6rem;
@@ -104,6 +111,21 @@ button:hover {
   color: $black;
 }
 
+.Error {
+  color: $red;
+  font-size: 70%;
+}
+
+.Example {
+  background: #F6F8FA;
+  padding: 2rem;
+  border-radius: 0.4rem;
+  font-size: 80%;
+}
+
+.Example .Icon {
+  margin-right: 10px;
+}
 
 .Menu {
   align-items: center;
@@ -174,21 +196,4 @@ button:hover {
   @include lg {
     margin: 0 0 0 20rem;
   }
-}
-
-.Example {
-  background: #F6F8FA;
-  padding: 2rem;
-  border-radius: 0.4rem;
-  font-size: 80%;
-}
-
-.Example .Icon {
-  margin-right: 10px;
-}
-
-hr {
-  border: 0;
-  border-top: 1px solid $grey-border;
-  margin: 2rem 0;
 }

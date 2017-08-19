@@ -1,62 +1,53 @@
-export const ADD_CONTROL = 'ADD_CONTROL';
-export const FEED_ERROR = 'FEED_ERROR';
+export const ADD_STOCK = 'ADD_STOCK';
 export const FEED_START = 'FEED_START';
 export const FEED_SUCCESS = 'FEED_SUCCESS';
-export const NEW_STOCK = 'NEW_STOCK';
+export const INIT_STOCK = 'INIT_STOCK';
 export const SET_PROP = 'SET_PROP';
-export const UPDATE_STOCK = 'UPDATE_STOCK';
+export const SOCK_ERROR = 'SOCK_ERROR';
 
-export function addControl(data) {
+export const addStock = (data) => {
   return {
-    type: ADD_CONTROL,
-    data
+    type: ADD_STOCK,
+    lastStocks: data.lastStocks,
+    lastUpdate: data.lastUpdate
   };
-}
+};
 
-export function feedError(data) {
-  return {
-    type: FEED_ERROR,
-    data
-  };
-}
-
-export function feedStart(socket, data) {
-  socket.emit('feedStart', data);
+export const feedStart = (stockId) => {
   return {
     type: FEED_START,
-    data
+    stockId
   };
-}
+};
 
-export function feedSuccess(data) {
+export const feedSuccess = (data, stockId) => {
   return {
     type: FEED_SUCCESS,
-    data
+    data,
+    stockId
   };
-}
+};
 
-export function newStock(data) {
-  return (dispatch) => {
-    JSON.parse(data.updateData).forEach((updateData) => {
-      const key = updateData.t;
-      dispatch(updateStock(updateData, key));
-    });
-    dispatch(addControl(data));
+export const initStock = (data) => {
+  return {
+    type: INIT_STOCK,
+    lastStocks: data.lastStocks,
+    lastUpdate: data.lastUpdate,
+    stocks: data.stocks
   };
-}
+};
 
-export function setProp(key, value) {
+export const setProp = (key, value) => {
   return {
     type: SET_PROP,
     key,
     value
   };
-}
+};
 
-export function updateStock(updateData, key) {
+export const socketError = (data) => {
   return {
-    type: UPDATE_STOCK,
-    updateData,
-    key
+    type: SOCK_ERROR,
+    data
   };
-}
+};

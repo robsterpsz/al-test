@@ -34,6 +34,7 @@ plugins.push(
   new HtmlWebpackPlugin({
     template: path.join(paths.source, 'index.html'),
     path: paths.build,
+    favicon: path.join(paths.images, 'favicon.ico'),
     filename: 'index.html',
     minify: {
       collapseWhitespace: true,

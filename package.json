@@ -88,6 +88,7 @@
     "redis": "^2.7.1",
     "redux": "3.7.2",
     "redux-logger": "^3.0.6",
+    "redux-saga": "^0.15.6",
     "redux-thunk": "^2.2.0",
     "resolve-url-loader": "2.1.0",
     "sass-loader": "^6.0.6",
@@ -106,6 +107,9 @@
     "bluebird": "^3.5.0",
     "foreman": "2.0.0",
     "md5": "2.2.1",
-    "socket.io": "^2.0.3"
+    "moment": "^2.18.1",
+    "socket.io": "^2.0.3",
+    "time": "^0.12.0",
+    "timezone": "^1.0.6"
   }
 }

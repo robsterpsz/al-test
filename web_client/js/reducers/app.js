@@ -1,51 +1,57 @@
-import update from 'react-addons-update';
+import update from 'immutability-helper';
 
 import {
-  ADD_CONTROL,
-  FEED_ERROR,
   FEED_START,
   FEED_SUCCESS,
+  INIT_STOCK,
   SET_PROP,
-  UPDATE_STOCK
+  SOCK_ERROR,
+  ADD_STOCK
 } from 'actions/app';
 
-
 const initialState = {
-  feedError: null,
   feedLoading: false,
-  AAPL: [],
-  ABC: [],
-  F: [],
-  MSFT: [],
-  TSLA: [],
-  newStock: null,
-  selectedStock: ''
+  feedLoaded: [],
+  lastStocks: null,
+  lastUpdate: 0,
+  marketIsOpen: true,
+  selectedStock: '',
+  socketError: null,
+  stocks: []
 };
 
 const actionsMap = {
-  [ADD_CONTROL]: (state, action) => {
+  [ADD_STOCK]: (state, action) => {
+    const stocks = Object.assign({}, state.stocks);
+    action.lastStocks.forEach((stock) => { stocks[stock.id].push(stock); });
     return update(state, {
-      newStock: { $set: action.data }
-    });
-  },
-  [FEED_ERROR]: (state, action) => {
-    return update(state, {
-      feedError: { $set: action.data },
-      feedLoading: { $set: false }
+      lastStocks: { $set : action.lastStocks },
+      lastUpdate: { $set : action.lastUpdate },
+      stocks: { $set: stocks }
     });
   },
   [FEED_START]: (state, action) => {
     return update(state, {
       feedLoading: { $set: true },
-      selectedStock: { $set: action.data }
+      selectedStock: { $set: action.stockId }
     });
   },
   [FEED_SUCCESS]: (state, action) => {
-    const key = Object.keys(action.data).join('');
     return update(state, {
-      feedError: { $set: null },
       feedLoading: { $set: false },
-      [key]: {$set: action.data[key]}
+      feedLoaded: { $push: [action.stockId] },
+      selectedStock: { $set: action.stockId },
+      socketError: { $set: null },
+      stocks: {
+        [action.stockId]: { $set: action.data }
+      }
+    });
+  },
+  [INIT_STOCK]: (state, action) => {
+    return update(state, {
+      lastStocks: { $set : action.lastStocks },
+      lastUpdate: { $set : action.lastUpdate },
+      stocks: { $set: action.stocks }
     });
   },
   [SET_PROP]: (state, action) => {
@@ -53,12 +59,12 @@ const actionsMap = {
       [action.key]: { $set: action.value }
     });
   },
-  [UPDATE_STOCK]: (state, action) => {
+  [SOCK_ERROR]: (state, action) => {
     return update(state, {
-      [action.key]: { $push: [action.updateData] }
+      socketError: { $set: action.data },
+      feedLoading: { $set: false }
     });
   }
-
 };
 
 export default function reducer(state = initialState, action = {}) {

@@ -113,7 +113,7 @@ const rules = [
         },
       },
     ],
-  },
+  }
 ];
 
 // Almost the same rule is used in both development and production
