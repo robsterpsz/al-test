@@ -49,16 +49,16 @@ function subscribe(socket) {
       emit(addStock(addData));
     });
 
-    socket.on('close', () => {
+    socket.on('stock:close', () => {
       emit(setProp('marketIsOpen', false));
       emit(END);
     });
 
-    socket.on('socketError', (error) => {
+    socket.on('stock:error', (error) => {
       emit(socketError(error));
     });
 
-    socket.on('feedSuccess', (data, stockId) => {
+    socket.on('stock:feedSuccess', (data, stockId) => {
       const stocks = Object.keys(data.stocks).map((key) => {
         return JSON.parse(data.stocks[key]);
       });
@@ -75,7 +75,7 @@ function subscribe(socket) {
 
 function* read(socket) {
   const channel = yield call(subscribe, socket);
-  yield apply(socket, socket.emit, ['initStock']);
+  yield apply(socket, socket.emit, ['stock:init']);
   while (true) {
     let action = yield take(channel);
     yield put(action);
@@ -85,7 +85,7 @@ function* read(socket) {
 function* write(socket) {
   while (true) {
     const payload = yield take(FEED_START);
-    yield apply(socket, socket.emit, ['feedStart', payload.stockId]);
+    yield apply(socket, socket.emit, ['stock:feedStart', payload.stockId]);
   }
 }
 

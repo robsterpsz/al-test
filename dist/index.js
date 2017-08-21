@@ -92,7 +92,7 @@ var getStocksFromApi = function () {
             stockControl.marketIsOpen = (0, _dateUtils.getMarketStatus)();
             if (!stockControl.marketIsOpen && stockControl.apiIsWorking) {
               stockControl.apiIsWorking = false;
-              eventEmitter.emit('close');
+              eventEmitter.emit('stock:close');
               // this would work better on a 'non-stop' enviroment: maybe not suitable for heroku free dynos
               // const timeToOpen = getTimeToOpen();
               // refreshStockInterval(timeToOpen);
@@ -134,18 +134,9 @@ var getStocksFromApi = function () {
 
                 var redisKey = 'stock:' + stock.id;
                 if (hasToBeBackedUp) {
-                  console.log('lastUpdate:', lastUpdate);
                   var isoDate = lastUpdate.toISOString().split('-');
                   var backUpKey = '' + isoDate[0] + isoDate[1];
                   _redisCfg.redisClient.rename(redisKey, backUpKey);
-                }
-
-                var redisKeyMeta = 'stock:keys';
-                if (!stockControl[redisKeyMeta]) {
-                  stockControl[redisKeyMeta] = (0, _keys2.default)(stock).map(function (key) {
-                    return key;
-                  });
-                  _redisCfg.redisClient.hset('__STOCK_CONTROL__', [redisKeyMeta, (0, _stringify2.default)(stockControl[redisKeyMeta])]);
                 }
 
                 var stockValues = (0, _keys2.default)(stock).map(function (key) {
@@ -156,10 +147,9 @@ var getStocksFromApi = function () {
 
               _redisCfg.redisClient.hset('__STOCK_CONTROL__', ['lastUpdate', redisField, 'refCache', refCache, 'lastStocks', lastStocks]);
               // emit new data asap
-              eventEmitter.emit('newStock', {
+              eventEmitter.emit('stock:add', {
                 'lastStocks': lastStocks,
                 'lastUpdate': unixTime
-                // 'stocks': stocks
               });
             }
 
@@ -175,13 +165,13 @@ var getStocksFromApi = function () {
             // si existe otro error (ej: se cayo el api) debera manejarse de otra manera
             // (informandole al usuario la ultima actualizacion, que no existe conexion con el api, etc).
             if (/unfortunate/.test(_context.t0)) {
-              eventEmitter.emit('socketError', { message: 'API request failed. Retrying in 5 seconds.' });
+              eventEmitter.emit('stock:error', { message: 'API request failed. Retrying in 5 seconds.' });
               // this is needed for a border case: when retrying is beyond opening hours
               stockControl.apiIsWorking = stockControl.marketIsOpen ? false : true;
               refreshStockInterval(5 * 1000);
             } else {
               console.error(_context.t0);
-              eventEmitter.emit('socketError', { message: 'API connection unavailable.' });
+              eventEmitter.emit('stock:error', { message: 'API connection unavailable.' });
             }
 
           case 16:
@@ -203,10 +193,10 @@ io.on('connection', function (socket) {
   console.log('CONNECTION');
 
   // border case: empty db -> emit socketError about no data
-  socket.on('initStock', function () {
+  socket.on('stock:init', function () {
     if (stockControl.marketIsOpen) {
       if (!stockControl.lastUpdate) {
-        socket.emit('socketError', { message: 'There is no available data at the moment.' });
+        socket.emit('stock:error', { message: 'There is no available data at the moment.' });
       } else {
         console.log('send (first) Stock');
         var initStock = {
@@ -216,26 +206,26 @@ io.on('connection', function (socket) {
         socket.emit('stock:init', initStock);
       }
     } else {
-      socket.emit('close'); // market is closed
+      socket.emit('stock:close'); // market is closed
     }
   });
 
-  eventEmitter.on('close', function () {
-    socket.emit('close');
+  eventEmitter.on('stock:close', function () {
+    socket.emit('stock:close');
   });
 
   // feed immediately when new stock arrives from Api
-  eventEmitter.on('newStock', function (newStock) {
+  eventEmitter.on('stock:add', function (newStock) {
     console.log('emitting!');
     socket.emit('stock:add', newStock);
   });
 
-  eventEmitter.on('socketError', function (error) {
-    socket.emit('socketError', error);
+  eventEmitter.on('stock:error', function (error) {
+    socket.emit('stock:error', error);
   });
 
   // send all data from selected stockId
-  socket.on('feedStart', function (stockId) {
+  socket.on('stock:feedStart', function (stockId) {
     (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
       var redisKey, redisHash, data;
       return _regenerator2.default.wrap(function _callee2$(_context2) {
@@ -249,11 +239,9 @@ io.on('connection', function (socket) {
 
             case 4:
               redisHash = _context2.sent;
+              data = { stocks: redisHash };
 
-              // const redisKeyMeta = 'stock:keys';
-              data = { /*keys: stockControl[redisKeyMeta],*/stocks: redisHash };
-
-              socket.emit('feedSuccess', data, stockId);
+              socket.emit('stock:feedSuccess', data, stockId);
               _context2.next = 12;
               break;
 
@@ -262,7 +250,7 @@ io.on('connection', function (socket) {
               _context2.t0 = _context2['catch'](0);
 
               // console.error('socketError:', e);
-              socket.emit('socketError', { message: 'This service is not available at the moment.' });
+              socket.emit('stock:error', { message: 'This service is not available at the moment.' });
 
             case 12:
             case 'end':

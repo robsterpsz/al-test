@@ -52,7 +52,7 @@ const getStocksFromApi = async (stockNames = ['AAPL','ABC','MSFT','TSLA','F']) =
   stockControl.marketIsOpen = getMarketStatus();
   if (!stockControl.marketIsOpen && stockControl.apiIsWorking) {
     stockControl.apiIsWorking = false;
-    eventEmitter.emit('close');
+    eventEmitter.emit('stock:close');
     // this would work better on a 'non-stop' enviroment: maybe not suitable for heroku free dynos
     // const timeToOpen = getTimeToOpen();
     // refreshStockInterval(timeToOpen);
@@ -78,7 +78,8 @@ const getStocksFromApi = async (stockNames = ['AAPL','ABC','MSFT','TSLA','F']) =
       // usando Hashes para cada stock y el timestamp (unix) para cada transaccion guardada.
       const currentUpdate = new Date();
       const unixTime = Math.floor(currentUpdate / 1000);
-      const lastUpdate = stockControl.lastUpdate ? new Date(parseInt(stockControl.lastUpdate, 10) * 1000) : currentUpdate;
+      const lastUpdate = stockControl.lastUpdate ?
+        new Date(parseInt(stockControl.lastUpdate, 10) * 1000) : currentUpdate;
       const hasToBeBackedUp = lastUpdate.getMonth() !== currentUpdate.getMonth();
       const redisField = unixTime.toString();
 
@@ -86,18 +87,9 @@ const getStocksFromApi = async (stockNames = ['AAPL','ABC','MSFT','TSLA','F']) =
 
         const redisKey = `stock:${stock.id}`;
         if (hasToBeBackedUp) {
-          console.log('lastUpdate:', lastUpdate);
           const isoDate = lastUpdate.toISOString().split('-');
           const backUpKey = `${isoDate[0]}${isoDate[1]}`;
           redisClient.rename(redisKey, backUpKey);
-        }
-
-        const redisKeyMeta = 'stock:keys';
-        if (!stockControl[redisKeyMeta]) {
-          stockControl[redisKeyMeta] = Object.keys(stock).map((key) => { return key });
-          redisClient.hset('__STOCK_CONTROL__', [
-            redisKeyMeta, JSON.stringify(stockControl[redisKeyMeta])
-          ]);
         }
 
         const stockValues = Object.keys(stock).map((key) => { return stock[key] });
@@ -109,10 +101,9 @@ const getStocksFromApi = async (stockNames = ['AAPL','ABC','MSFT','TSLA','F']) =
         'lastUpdate', redisField, 'refCache', refCache, 'lastStocks', lastStocks
       ]);
       // emit new data asap
-      eventEmitter.emit('newStock', {
+      eventEmitter.emit('stock:add', {
         'lastStocks': lastStocks,
         'lastUpdate': unixTime
-        // 'stocks': stocks
       });
     }
 
@@ -122,13 +113,13 @@ const getStocksFromApi = async (stockNames = ['AAPL','ABC','MSFT','TSLA','F']) =
     // si existe otro error (ej: se cayo el api) debera manejarse de otra manera
     // (informandole al usuario la ultima actualizacion, que no existe conexion con el api, etc).
     if (/unfortunate/.test(ex)) {
-      eventEmitter.emit('socketError', { message: 'API request failed. Retrying in 5 seconds.' });
+      eventEmitter.emit('stock:error', { message: 'API request failed. Retrying in 5 seconds.' });
       // this is needed for a border case: when retrying is beyond opening hours
       stockControl.apiIsWorking = stockControl.marketIsOpen ? false : true;
       refreshStockInterval(5 * 1000);
     } else {
       console.error(ex);
-      eventEmitter.emit('socketError', { message: 'API connection unavailable.' });
+      eventEmitter.emit('stock:error', { message: 'API connection unavailable.' });
     }
 
   }
@@ -141,10 +132,10 @@ io.on('connection', (socket) => {
   console.log('CONNECTION');
 
   // border case: empty db -> emit socketError about no data
-  socket.on('initStock', () => {
+  socket.on('stock:init', () => {
     if (stockControl.marketIsOpen) {
       if (!stockControl.lastUpdate) {
-        socket.emit('socketError', { message: 'There is no available data at the moment.' });
+        socket.emit('stock:error', { message: 'There is no available data at the moment.' });
       } else {
         console.log('send (first) Stock');
         const initStock = {
@@ -154,36 +145,35 @@ io.on('connection', (socket) => {
         socket.emit('stock:init', initStock);
       }
     } else {
-      socket.emit('close'); // market is closed
+      socket.emit('stock:close'); // market is closed
     }
   });
 
-  eventEmitter.on('close', () => {
-    socket.emit('close');
+  eventEmitter.on('stock:close', () => {
+    socket.emit('stock:close');
   });
 
   // feed immediately when new stock arrives from Api
-  eventEmitter.on('newStock', (newStock) => {
+  eventEmitter.on('stock:add', (newStock) => {
     console.log('emitting!');
     socket.emit('stock:add', newStock);
   });
 
-  eventEmitter.on('socketError', (error) => {
-    socket.emit('socketError', error);
+  eventEmitter.on('stock:error', (error) => {
+    socket.emit('stock:error', error);
   });
 
   // send all data from selected stockId
-  socket.on('feedStart', (stockId) => {
+  socket.on('stock:feedStart', (stockId) => {
     (async () => {
       try {
         const redisKey = `stock:${stockId}`;
         const redisHash = await getRedisHash(redisKey);
-        // const redisKeyMeta = 'stock:keys';
-        const data = { /*keys: stockControl[redisKeyMeta],*/ stocks: redisHash }
-        socket.emit('feedSuccess', data, stockId);
+        const data = { stocks: redisHash }
+        socket.emit('stock:feedSuccess', data, stockId);
       } catch (e) {
         // console.error('socketError:', e);
-        socket.emit('socketError', { message: 'This service is not available at the moment.' });
+        socket.emit('stock:error', { message: 'This service is not available at the moment.' });
       }
     })();
   });
