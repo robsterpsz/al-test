@@ -23,10 +23,12 @@ const initialState = {
 const actionsMap = {
   [ADD_STOCK]: (state, action) => {
     const stocks = Object.assign({}, state.stocks);
-    action.lastStocks.forEach((stock) => { stocks[stock.id].push(stock); });
+    Object.keys(action.stocks).forEach((key) => { stocks[key].push(action.stocks[key][0]); });
     return update(state, {
+      feedLoading: { $set: false },
       lastStocks: { $set : action.lastStocks },
       lastUpdate: { $set : action.lastUpdate },
+      socketError: { $set: action.data },
       stocks: { $set: stocks }
     });
   },
@@ -49,8 +51,10 @@ const actionsMap = {
   },
   [INIT_STOCK]: (state, action) => {
     return update(state, {
+      feedLoading: { $set: false },
       lastStocks: { $set : action.lastStocks },
       lastUpdate: { $set : action.lastUpdate },
+      socketError: { $set: action.data },
       stocks: { $set: action.stocks }
     });
   },

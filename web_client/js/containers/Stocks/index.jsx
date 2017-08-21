@@ -71,20 +71,23 @@ export default class Stocks extends Component {
 
       if (selectedStock) {
 
-        const stock = stocks[selectedStock][0];
-
+        const stock = lastStocks.filter((stock) => { return stock.id === selectedStock });
+        const keys = Object.keys(stock[0]).map ((key) => { return key });
+        console.log('HOLA')
         history = <History
           dispatch={dispatch}
+          keys={keys}
           stocks={stocks[selectedStock]}
           selectedStock={selectedStock}
-          stockName={stock.t}
-          stockPrice={stock.l}
-          tradeMarket={stock.e}
+          stockName={stock[0].t}
+          stockPrice={stock[0].l}
+          tradeMarket={stock[0].e}
           />;
 
       } else {
 
         lastStocks.forEach(stock => {
+
           const stockName = stock.t;
           const tradeMarket = stock.e;
           const price = stock.l;
@@ -100,6 +103,7 @@ export default class Stocks extends Component {
                 </button>
               </h3>
             );
+
         });
       }
 
@@ -112,7 +116,7 @@ export default class Stocks extends Component {
           {message}
         </p>
         <p className='Error'>
-          {socketError && `ERROR: ${socketError.message}`}
+          {socketError && socketError.message}
         </p>
         <hr />
         <div>{stockBlock}</div>

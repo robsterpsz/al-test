@@ -29,3 +29,48 @@ export const toMoment = (date, timezone) => {
   const local_datetime = toLocal(date, timezone);
   return moment(local_datetime, moment_format);
 };
+
+/**
+* Nasdaq opens at 09:30 and closes at 16:00 EDT from Monday to Friday
+* NYSE opens at 09:30 and closes at 16:00 ET from Monday to Friday
+* @return moment with the appropriate timezone
+*/
+export const getApiTimeZone = () => {
+  return toMoment(new Date(), 'America/New_York');
+};
+/**
+*  @return a Moment.js duration object indicating time left to open trade market
+*/
+export const getTimeToOpen = () => {
+  const apiTimezone = getApiTimeZone();
+  const day = apiTimezone.day();
+  const hour = apiTimezone.hour();
+  let refDate = toMoment(new Date(), 'America/New_York');
+  refDate.set({'hour': 9, 'minute': 30, 'second': 0, 'millisecond': 0});
+  if (day === 6) {
+    refDate.add(2, 'days');
+  } else if (day === 5 && hour > 15) {
+    refDate.add(3, 'days');
+  } else if (day === 0 || hour > 15) {
+    refDate.add(1, 'days');
+  }
+  return Math.abs(refDate.diff(apiTimezone));
+};
+
+/**
+* @return true when market is open*
+*/
+export const getMarketStatus = () => {
+  const apiTimezone = getApiTimeZone();
+  const openingDay = apiTimezone.day();
+  let marketStatus = openingDay > 0 && openingDay < 6;
+  if (marketStatus) {
+    const openingHour = apiTimezone.hour();
+    marketStatus = openingHour * 60 < 959;
+    if (marketStatus) {
+      const minutes = apiTimezone.minutes();
+      marketStatus = openingHour * 60 + minutes > 569;
+    }
+  }
+  return marketStatus;
+};

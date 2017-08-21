@@ -9,7 +9,8 @@ export const addStock = (data) => {
   return {
     type: ADD_STOCK,
     lastStocks: data.lastStocks,
-    lastUpdate: data.lastUpdate
+    lastUpdate: data.lastUpdate,
+    stocks: data.stocks
   };
 };
 

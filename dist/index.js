@@ -4,6 +4,10 @@ var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
 var _stringify = require('babel-runtime/core-js/json/stringify');
 
 var _stringify2 = _interopRequireDefault(_stringify);
@@ -37,30 +41,72 @@ var port = process.env.PORT || 8080;
 _http.server.listen(port);
 console.log('Server running at port:' + port);
 
+/**
+* stockControl object will help us out to deal with stocks flow
+* refCache is used to avoid dupes basically
+*/
+var stockControl = {
+  lastStocks: null,
+  lastUpdate: null,
+  refCache: null
+};
+_redisCfg.redisClient.hgetall('__STOCK_CONTROL__', function (err, stocksData) {
+  if (err) throw new Error('Redis service error:', err);
+  if (stocksData) {
+    stockControl = stocksData;
+  }
+  // Once we are ready, we set the requesting clock and start requesting stock data asap
+  stockControl.apiIsWorking = false;
+  stockControl.interval = null;
+  stockControl.marketIsOpen = false;
+  getStocksFromApi();
+});
+
+/**
+* Timer manager for stocks request function
+* @return an interval
+*/
+var refreshStockInterval = function refreshStockInterval() {
+  var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 60 * 1000;
+
+  console.log('Time to getStocksFromApi set to ' + time / 1000 + ' secs');
+  clearInterval(stockControl.interval);
+  stockControl.interval = setInterval(getStocksFromApi, time);
+};
+
+var errorSimulation = function errorSimulation() {
+  // La API debera simular un 10% rate de errores usando el siguiente codigo:
+  if (Math.random(0, 1) < 0.1) throw new Error('How unfortunate! The API Request Failed');
+};
+
 // Stocks request function
-var apiIsWorking = true;
 var getStocksFromApi = function () {
   var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
     var stockNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ['AAPL', 'ABC', 'MSFT', 'TSLA', 'F'];
-    var marketIsOpen, url, stocks, lastStocks, refCache, unixTime, redisField;
+    var url, stocks, lastStocks, refCache, currentUpdate, unixTime, lastUpdate, hasToBeBackedUp, redisField;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            marketIsOpen = getMarketStatus();
 
-            if (!marketIsOpen && apiIsWorking) {
-              apiIsWorking = false;
+            stockControl.marketIsOpen = (0, _dateUtils.getMarketStatus)();
+            if (!stockControl.marketIsOpen && stockControl.apiIsWorking) {
+              stockControl.apiIsWorking = false;
               eventEmitter.emit('close');
+              // this would work better on a 'non-stop' enviroment: maybe not suitable for heroku free dynos
+              // const timeToOpen = getTimeToOpen();
+              // refreshStockInterval(timeToOpen);
               // TODO: informar la usuario que no se va a actualizar mas hasta la proxima apertura.
-            } else if (marketIsOpen && !apiIsWorking) {
-              // console.log('market is opening, increasing stocks fetching frequency to 1 minute');
-              apiIsWorking = true;
+            } else if (stockControl.marketIsOpen && !stockControl.apiIsWorking) {
+              stockControl.apiIsWorking = true;
               refreshStockInterval();
             }
+
             _context.prev = 2;
 
+
             errorSimulation();
+
             url = 'http://finance.google.com/finance/info?client=ig&q=' + stockNames.join(',');
             _context.next = 7;
             return (0, _http.get)(url);
@@ -77,23 +123,46 @@ var getStocksFromApi = function () {
               stockControl.refCache = refCache;
               // La data debera ser guardada en Redis,
               // usando Hashes para cada stock y el timestamp (unix) para cada transaccion guardada.
-              unixTime = Math.floor(new Date() / 1000);
+              currentUpdate = new Date();
+              unixTime = Math.floor(currentUpdate / 1000);
+              lastUpdate = stockControl.lastUpdate ? new Date(parseInt(stockControl.lastUpdate, 10) * 1000) : currentUpdate;
+              hasToBeBackedUp = lastUpdate.getMonth() !== currentUpdate.getMonth();
               redisField = unixTime.toString();
 
+
               stocks.forEach(function (stock) {
-                var redisData = new Array();
-                var redisKey = stock.id;
-                var stockData = (0, _stringify2.default)(stock);
-                _redisCfg.redisClient.hset(redisKey, redisField, stockData);
+
+                var redisKey = 'stock:' + stock.id;
+                if (hasToBeBackedUp) {
+                  console.log('lastUpdate:', lastUpdate);
+                  var isoDate = lastUpdate.toISOString().split('-');
+                  var backUpKey = '' + isoDate[0] + isoDate[1];
+                  _redisCfg.redisClient.rename(redisKey, backUpKey);
+                }
+
+                var redisKeyMeta = 'stock:keys';
+                if (!stockControl[redisKeyMeta]) {
+                  stockControl[redisKeyMeta] = (0, _keys2.default)(stock).map(function (key) {
+                    return key;
+                  });
+                  _redisCfg.redisClient.hset('__STOCK_CONTROL__', [redisKeyMeta, (0, _stringify2.default)(stockControl[redisKeyMeta])]);
+                }
+
+                var stockValues = (0, _keys2.default)(stock).map(function (key) {
+                  return stock[key];
+                });
+                _redisCfg.redisClient.hset(redisKey, redisField, (0, _stringify2.default)(stockValues));
               });
+
               _redisCfg.redisClient.hset('__STOCK_CONTROL__', ['lastUpdate', redisField, 'refCache', refCache, 'lastStocks', lastStocks]);
               // emit new data asap
               eventEmitter.emit('newStock', {
                 'lastStocks': lastStocks,
-                'lastUpdate': unixTime,
-                'stocks': stocks
+                'lastUpdate': unixTime
+                // 'stocks': stocks
               });
             }
+
             _context.next = 16;
             break;
 
@@ -101,15 +170,17 @@ var getStocksFromApi = function () {
             _context.prev = 13;
             _context.t0 = _context['catch'](2);
 
+
             // Se debera capturar SOLAMENTE este error para los reintentos
             // si existe otro error (ej: se cayo el api) debera manejarse de otra manera
             // (informandole al usuario la ultima actualizacion, que no existe conexion con el api, etc).
             if (/unfortunate/.test(_context.t0)) {
-              eventEmitter.emit('socketError', { message: 'API request failed. Retrying in 30 seconds.' });
+              eventEmitter.emit('socketError', { message: 'API request failed. Retrying in 5 seconds.' });
               // this is needed for a border case: when retrying is beyond opening hours
-              apiIsWorking = marketIsOpen ? false : true;
-              refreshStockInterval(30 * 1000);
+              stockControl.apiIsWorking = stockControl.marketIsOpen ? false : true;
+              refreshStockInterval(5 * 1000);
             } else {
+              console.error(_context.t0);
               eventEmitter.emit('socketError', { message: 'API connection unavailable.' });
             }
 
@@ -126,47 +197,6 @@ var getStocksFromApi = function () {
   };
 }();
 
-// Return true when market is open
-var getMarketStatus = function getMarketStatus() {
-  // Nasdaq opens at 09:30 and closes at 16:00 EDT from Monday to Friday
-  // NYSE opens at 09:30 and closes at 16:00 ET from Monday to Friday
-  var apiTimezone = (0, _dateUtils.toMoment)(new Date(), 'America/New_York');
-  var openingHour = apiTimezone.hour();
-  var minutes = apiTimezone.minutes();
-  var openingDay = apiTimezone.day();
-  return openingHour * 60 + minutes > 569 && openingHour * 60 < 959 && openingDay > 0 && openingDay < 6;
-};
-
-// Timer manager for stocks request function
-var getStocksFromApiRef = null;
-var refreshStockInterval = function refreshStockInterval() {
-  var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 60 * 1000;
-
-  console.log('Time to getStocksFromApi set to ' + time / 1000 + ' secs');
-  clearInterval(getStocksFromApiRef);
-  getStocksFromApiRef = setInterval(getStocksFromApi, time);
-};
-
-// refCache for stocks -> to avoid dupes basically
-var stockControl = {
-  lastStocks: null,
-  lastUpdate: null,
-  refCache: null
-};
-_redisCfg.redisClient.hgetall('__STOCK_CONTROL__', function (err, stocksData) {
-  if (err) throw new Error('Redis service error:', err);
-  if (stocksData) {
-    stockControl = stocksData;
-  }
-  // Once we are ready, we set the requesting clock and start requesting stock data asap
-  refreshStockInterval();
-});
-
-var errorSimulation = function errorSimulation() {
-  // La API debera simular un 10% rate de errores usando el siguiente codigo:
-  if (Math.random(0, 1) < 0.1) throw new Error('How unfortunate! The API Request Failed');
-};
-
 // Socket.io stuff
 var io = new _socket2.default(_http.server);
 io.on('connection', function (socket) {
@@ -174,7 +204,7 @@ io.on('connection', function (socket) {
 
   // border case: empty db -> emit socketError about no data
   socket.on('initStock', function () {
-    if (!getMarketStatus()) {
+    if (stockControl.marketIsOpen) {
       if (!stockControl.lastUpdate) {
         socket.emit('socketError', { message: 'There is no available data at the moment.' });
       } else {
@@ -196,7 +226,7 @@ io.on('connection', function (socket) {
 
   // feed immediately when new stock arrives from Api
   eventEmitter.on('newStock', function (newStock) {
-    // console.log('emitting!');
+    console.log('emitting!');
     socket.emit('stock:add', newStock);
   });
 
@@ -207,35 +237,39 @@ io.on('connection', function (socket) {
   // send all data from selected stockId
   socket.on('feedStart', function (stockId) {
     (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
-      var redisHash;
+      var redisKey, redisHash, data;
       return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
-              _context2.next = 3;
-              return (0, _redisCfg.getRedisHash)(stockId);
+              redisKey = 'stock:' + stockId;
+              _context2.next = 4;
+              return (0, _redisCfg.getRedisHash)(redisKey);
 
-            case 3:
+            case 4:
               redisHash = _context2.sent;
 
-              socket.emit('feedSuccess', redisHash, stockId);
-              _context2.next = 10;
+              // const redisKeyMeta = 'stock:keys';
+              data = { /*keys: stockControl[redisKeyMeta],*/stocks: redisHash };
+
+              socket.emit('feedSuccess', data, stockId);
+              _context2.next = 12;
               break;
 
-            case 7:
-              _context2.prev = 7;
+            case 9:
+              _context2.prev = 9;
               _context2.t0 = _context2['catch'](0);
 
               // console.error('socketError:', e);
               socket.emit('socketError', { message: 'This service is not available at the moment.' });
 
-            case 10:
+            case 12:
             case 'end':
               return _context2.stop();
           }
         }
-      }, _callee2, undefined, [[0, 7]]);
+      }, _callee2, undefined, [[0, 9]]);
     }))();
   });
 

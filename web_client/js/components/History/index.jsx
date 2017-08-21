@@ -28,6 +28,38 @@ export default class History extends Component {
   render() {
 
     const { stockPrice, selectedStock, stockName, stocks, tradeMarket } = this.props;
+    const orderStocks = stocks.map((stock, i) => {
+            return (<div key={`${i}${stock[9]}`}>
+              {stock[0]}&nbsp;
+              {stock[1]}&nbsp;
+              {stock[2]}&nbsp;
+              {stock[3]}&nbsp;
+              {stock[4]}&nbsp;
+              {stock[5]}&nbsp;
+              {stock[6]}&nbsp;
+              {stock[7]}&nbsp;
+              {stock[8]}&nbsp;
+              {stock[9]}&nbsp;
+              {stock[10]}&nbsp;
+              {stock[11]}&nbsp;
+              {stock[12]}&nbsp;
+              {stock[13]}&nbsp;
+              {stock[14]}&nbsp;
+              {stock[15]}&nbsp;
+              {stock[16]}&nbsp;
+              {stock[17]}&nbsp;
+              {stock[18]}&nbsp;
+              {stock[19]}&nbsp;
+              {stock[20]}&nbsp;
+              {stock[21]}&nbsp;
+              {stock[22]}&nbsp;
+              {stock[23]}&nbsp;
+              {stock[24]}&nbsp;
+              {stock[25]}&nbsp;
+              {stock[26]}
+              <hr />
+              </div>)
+          }).reverse();
     return (
       <div>
         <h3>{stockName} [{tradeMarket}] USD {stockPrice}
@@ -39,38 +71,7 @@ export default class History extends Component {
           </button>
         </h3>
         <div className='Example'>
-          { stocks.map((stock, i) => {
-            return (<div key={i}>
-              id: {stock.id}
-              t: {stock.t}
-              e: {stock.e}
-              l: {stock.l}
-              l_fix: {stock.l_fix}
-              l_cur: {stock.l_cur}
-              s: {stock.s}
-              ltt: {stock.ltt}
-              lt: {stock.lt}
-              lt_dts: {stock.lt_dts}
-              c: {stock.c}
-              c_fix: {stock.c_fix}
-              cp: {stock.cp}
-              cp_fix: {stock.cp_fix}
-              ccol: {stock.ccol}
-              pcls_fix: {stock.pcls_fix}
-              el:{stock.el}
-              el_fix: {stock.el_fix}
-              el_cur: {stock.el_cur}
-              elt: {stock.elt}
-              ec: {stock.ec}
-              ec_fix: {stock.ec_fix}
-              ecp: {stock.ecp}
-              ecp_fix: {stock.ecp_fix}
-              eccol: {stock.eccol}
-              div: {stock.div}
-              yld: {stock.yld}
-              <hr />
-              </div>)
-          }) }
+          {orderStocks}
         </div>
       </div>
     );

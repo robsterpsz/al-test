@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.toMoment = exports.toLocal = undefined;
+exports.getMarketStatus = exports.getTimeToOpen = exports.getApiTimeZone = exports.toMoment = exports.toLocal = undefined;
 
 var _moment = require('moment');
 
@@ -45,4 +45,49 @@ var toLocal = exports.toLocal = function toLocal(date, timezone) {
 var toMoment = exports.toMoment = function toMoment(date, timezone) {
   var local_datetime = toLocal(date, timezone);
   return (0, _moment2.default)(local_datetime, moment_format);
+};
+
+/**
+* Nasdaq opens at 09:30 and closes at 16:00 EDT from Monday to Friday
+* NYSE opens at 09:30 and closes at 16:00 ET from Monday to Friday
+* @return moment with the appropriate timezone
+*/
+var getApiTimeZone = exports.getApiTimeZone = function getApiTimeZone() {
+  return toMoment(new Date(), 'America/New_York');
+};
+/**
+*  @return a Moment.js duration object indicating time left to open trade market
+*/
+var getTimeToOpen = exports.getTimeToOpen = function getTimeToOpen() {
+  var apiTimezone = getApiTimeZone();
+  var day = apiTimezone.day();
+  var hour = apiTimezone.hour();
+  var refDate = toMoment(new Date(), 'America/New_York');
+  refDate.set({ 'hour': 9, 'minute': 30, 'second': 0, 'millisecond': 0 });
+  if (day === 6) {
+    refDate.add(2, 'days');
+  } else if (day === 5 && hour > 15) {
+    refDate.add(3, 'days');
+  } else if (day === 0 || hour > 15) {
+    refDate.add(1, 'days');
+  }
+  return Math.abs(refDate.diff(apiTimezone));
+};
+
+/**
+* @return true when market is open*
+*/
+var getMarketStatus = exports.getMarketStatus = function getMarketStatus() {
+  var apiTimezone = getApiTimeZone();
+  var openingDay = apiTimezone.day();
+  var marketStatus = openingDay > 0 && openingDay < 6;
+  if (marketStatus) {
+    var openingHour = apiTimezone.hour();
+    marketStatus = openingHour * 60 < 959;
+    if (marketStatus) {
+      var minutes = apiTimezone.minutes();
+      marketStatus = openingHour * 60 + minutes > 569;
+    }
+  }
+  return marketStatus;
 };

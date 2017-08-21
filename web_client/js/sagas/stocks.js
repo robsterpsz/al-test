@@ -1,7 +1,6 @@
 import io from 'socket.io-client';
-import { eventChannel } from 'redux-saga';
+import { END, eventChannel } from 'redux-saga';
 import { apply, call, fork, put, take } from 'redux-saga/effects';
-import { END } from 'redux-saga';
 import {
   addStock,
   FEED_START,
@@ -12,6 +11,7 @@ import {
 } from '../actions/app.js';
 
 function connect() {
+  // TODO: figure out how to deploy automatically with auto socket
   const socket = io('http://localhost:8080');
   return new Promise(resolve => {
     socket.on('connect', () => {
@@ -23,24 +23,30 @@ function connect() {
 function subscribe(socket) {
   return eventChannel(emit => {
 
-    socket.on('stock:init', (data) => {
+    const processIncomingStock = (data) => {
       const lastStocks = JSON.parse(data.lastStocks);
       const stocks = new Object();
-      lastStocks.forEach((stock) => { stocks[stock.id] = [stock]; });
-      const initData = {
+      lastStocks.forEach((stock) => {
+        const stockValues = Object.keys(stock).map((key) => {
+          return stock[key];
+        });
+        stocks[stock.id] = [stockValues];
+      });
+      return {
         'lastStocks': lastStocks,
         'lastUpdate': parseInt(data.lastUpdate, 10),
         'stocks': stocks
       };
+    };
+
+    socket.on('stock:init', (data) => {
+      const initData = processIncomingStock(data);
       emit(initStock(initData));
     });
 
     socket.on('stock:add', (data) => {
-      const stocksData = {
-        'lastStocks': JSON.parse(data.lastStocks),
-        'lastUpdate': parseInt(data.lastUpdate, 10)
-      };
-      emit(addStock(stocksData));
+      const addData = processIncomingStock(data);
+      emit(addStock(addData));
     });
 
     socket.on('close', () => {
@@ -53,8 +59,8 @@ function subscribe(socket) {
     });
 
     socket.on('feedSuccess', (data, stockId) => {
-      const stocks = Object.keys(data).map((key) => {
-        return JSON.parse(data[key]);
+      const stocks = Object.keys(data.stocks).map((key) => {
+        return JSON.parse(data.stocks[key]);
       });
       emit(feedSuccess(stocks, stockId));
     });
