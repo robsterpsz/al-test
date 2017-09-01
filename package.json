@@ -4,7 +4,7 @@
   "description": "AL task made for testing purposes",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "npm run build:client && npm run build:docs && npm run build:server",
+    "build:all": "npm run build:client && npm run build:docs && npm run build:server",
     "build:client": "npm run clean && NODE_ENV=\"production\" webpack",
     "build:dev-client": "npm run clean && webpack",
     "build:docs" : "./node_modules/.bin/esdoc",
