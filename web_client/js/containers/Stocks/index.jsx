@@ -1,32 +1,32 @@
 import History from '../../components/History';
-import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import StockHeader from './header';
 import { connect } from 'react-redux';
 import { feedStart, setProp } from 'actions/app';
-import { NavLink } from 'react-router-dom';
-import { routeCodes } from '../../config/routes.jsx';
 
+// watch out for semis!!! weird ES7 decorators stuff :P
+// http://blog.spoonx.nl/babel-es7-leading-decorators-must-be-attached-to-a-class-declaration/
 @connect(state => ({
-  socketError: state.app.socketError,
-  feedLoaded: state.app.feedLoaded,
-  feedLoading: state.app.feedLoading,
-  lastStocks: state.app.lastStocks,
+  cacheSync: state.app.cacheSync,
   lastUpdate: state.app.lastUpdate,
-  marketIsOpen: state.app.marketIsOpen,
-  selectedStock: state.app.selectedStock,
+  loading: state.app.loading,
+  market: state.app.market,
+  selectedStockId: state.app.selectedStockId,
+  socketError: state.app.socketError,
+  stockCache: state.app.stockCache,
   stocks: state.app.stocks
 }))
 
 export default class Stocks extends Component {
   static propTypes = {
-    socketError: PropTypes.object,
-    feedLoaded: PropTypes.array,
-    feedLoading: PropTypes.bool,
-    lastStocks: PropTypes.array,
+    cacheSync: PropTypes.array,
     lastUpdate: PropTypes.number,
-    marketIsOpen: PropTypes.bool,
-    selectedStock: PropTypes.string,
+    loading: PropTypes.bool,
+    market: PropTypes.object,
+    selectedStockId: PropTypes.string,
+    socketError: PropTypes.object,
+    stockCache: PropTypes.object,
     stocks: PropTypes.object,
     dispatch: PropTypes.func
   }
@@ -37,90 +37,69 @@ export default class Stocks extends Component {
   }
 
   setFeedClick(stockId) {
-    const { dispatch, feedLoaded } = this.props;
-    const isLoaded = feedLoaded.indexOf(stockId) !== -1;
-    if (isLoaded) {
-      dispatch(setProp('selectedStock', stockId));
+    const { dispatch, cacheSync, selectedStockId } = this.props;
+    if (stockId === selectedStockId) {
+      dispatch(setProp('selectedStockId', ''));
     } else {
-      dispatch(feedStart(stockId));
+      dispatch(feedStart(stockId, cacheSync[stockId]));
     }
   }
 
   render() {
     const {
-      dispatch,
-      feedLoaded,
-      feedLoading,
-      lastStocks,
+      cacheSync,
       lastUpdate,
-      marketIsOpen,
-      selectedStock,
+      loading,
+      market,
+      selectedStockId,
       socketError,
+      stockCache,
       stocks
     } = this.props;
 
-    const marketStatus = marketIsOpen ? ' is open' : ' is closed';
+    const stockBlock = Object.keys(stocks)
+      .sort((a, b) => {
+        return stocks[a][0][1] > stocks[b][0][1];
+      })
+      .map((key) => {
 
-    let message = 'This service is available every business day from 09:30 to 16:00 EDT.';
-    let stockBlock = new Array();
-    let history = '';
+        const stock = stocks[key][stocks[key].length-1];
+        const stockName = stock[1];
+        const tradeMarket = stock[2];
+        const price = stock[3];
 
-    if (lastUpdate) {
-      const lastDate = new Date(lastUpdate * 1000);
-      message = `Last Update: ${lastDate.toLocaleString()}`;
-
-      if (selectedStock) {
-
-        const stock = lastStocks.filter((stock) => { return stock.id === selectedStock });
-        const keys = Object.keys(stock[0]).map ((key) => { return key });
-        console.log('HOLA')
-        history = <History
-          dispatch={dispatch}
-          keys={keys}
-          stocks={stocks[selectedStock]}
-          selectedStock={selectedStock}
-          stockName={stock[0].t}
-          stockPrice={stock[0].l}
-          tradeMarket={stock[0].e}
+        let history = '';
+        if (selectedStockId === key) {
+          history = <History
+            stock={stocks[selectedStockId]}
+            stockCache={stockCache[selectedStockId]}
           />;
+        }
 
-      } else {
+        return (
+          <div key={key}>
+            <button
+              className='Button-list'
+              disabled={ loading && market.isOpen && !cacheSync[key]}
+              onTouchTap={ () => this.setFeedClick(key) }
+            >
+              {stockName} [{tradeMarket}] USD {price}
+            </button>
+            {history}
+          </div>
+        );
 
-        lastStocks.forEach(stock => {
-
-          const stockName = stock.t;
-          const tradeMarket = stock.e;
-          const price = stock.l;
-
-          stockBlock.push(
-              <h3 key={`k${stock.id}`}>{stockName} [{tradeMarket}] USD {price}
-                <button
-                  className='Button-link'
-                  disabled={ feedLoading }
-                  onTouchTap={ () => this.setFeedClick(stock.id) }
-                >
-                  History
-                </button>
-              </h3>
-            );
-
-        });
-      }
-
-    }
+      });
 
     return (
       <div>
-        <h1>Stock Market {marketStatus}</h1>
-        <p>
-          {message}
-        </p>
-        <p className='Error'>
-          {socketError && socketError.message}
-        </p>
+        <StockHeader
+          lastUpdate={lastUpdate}
+          market={market}
+          socketError={socketError}
+        />
         <hr />
         <div>{stockBlock}</div>
-        {history}
       </div>
     );
   }

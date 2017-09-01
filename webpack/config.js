@@ -109,7 +109,7 @@ const rules = [
       {
         loader: 'file-loader',
         options: {
-          name: 'client/assets/[name]-[hash].[ext]',
+          name: 'assets/[hash]-[name].[ext]',
         },
       },
     ],

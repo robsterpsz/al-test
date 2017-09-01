@@ -19,26 +19,28 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
-const store = configureStore();
+configureStore().then((store) => {
 
-const render = Component => {
-  ReactDOM.render(
-    <AppContainer>
-      <Provider store={ store }>
-        <Component />
-      </Provider>
-    </AppContainer>,
-    document.getElementById('root')
-  );
-};
+  const render = Component => {
+    ReactDOM.render(
+      <AppContainer>
+        <Provider store={ store }>
+          <Component />
+        </Provider>
+      </AppContainer>,
+      document.getElementById('root')
+    );
+  };
 
-// Render app
-render(Client);
+  // Render app
+  render(Client);
 
-if (module.hot) {
-  module.hot.accept('./components/Client/', () => {
-    const NewClient = require('./components/Client/index').default; // eslint-disable-line global-require
+  if (module.hot) {
+    module.hot.accept('./components/Client/', () => {
+      const NewClient = require('./components/Client/index').default; // eslint-disable-line global-require
 
-    render(NewClient);
-  });
-}
+      render(NewClient);
+    });
+  }
+
+});

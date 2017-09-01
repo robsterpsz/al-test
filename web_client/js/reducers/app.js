@@ -1,23 +1,25 @@
 import update from 'immutability-helper';
 
 import {
+  ADD_STOCK,
+  CLOSE,
+  FEED_CACHE,
+  FEED_END,
   FEED_START,
-  FEED_SUCCESS,
   INIT_STOCK,
   SET_PROP,
   SOCK_ERROR,
-  ADD_STOCK
 } from 'actions/app';
 
 const initialState = {
-  feedLoading: false,
-  feedLoaded: [],
-  lastStocks: null,
+  cacheSync: {},
   lastUpdate: 0,
-  marketIsOpen: true,
-  selectedStock: '',
-  socketError: null,
-  stocks: []
+  loading: false,
+  market: {},
+  selectedStockId: '',
+  socketError: {},
+  stockCache: {},
+  stocks: {}
 };
 
 const actionsMap = {
@@ -25,37 +27,57 @@ const actionsMap = {
     const stocks = Object.assign({}, state.stocks);
     Object.keys(action.stocks).forEach((key) => { stocks[key].push(action.stocks[key][0]); });
     return update(state, {
-      feedLoading: { $set: false },
-      lastStocks: { $set : action.lastStocks },
+      loading: { $set: false },
       lastUpdate: { $set : action.lastUpdate },
-      socketError: { $set: action.data },
+      socketError: { $set: initialState.socketError },
       stocks: { $set: stocks }
+    });
+  },
+  [CLOSE]: (state, action) => {
+    return update(state, {
+      market: { $set: action.market }
+    });
+  },
+  [FEED_CACHE]: (state, action) => {
+    return update(state, {
+      loading: { $set: false },
+      cacheSync: {
+        [action.cacheSync.stockId]: { $set: action.cacheSync }
+      },
+      selectedStockId: { $set: action.cacheSync.stockId },
+      socketError: { $set: initialState.socketError },
+      stockCache: {
+        [action.cacheSync.stockId]: { $set: action.data }
+      }
+    });
+  },
+  [FEED_END]: (state, action) => {
+    return update(state, {
+      loading: { $set: false },
+      cacheSync: {
+        [action.cacheSync.stockId]: { $set: action.cacheSync }
+      },
+      selectedStockId: { $set: action.cacheSync.stockId },
+      socketError: { $set: initialState.socketError },
+      stocks: {
+        [action.cacheSync.stockId]: { $set: action.data }
+      }
     });
   },
   [FEED_START]: (state, action) => {
     return update(state, {
-      feedLoading: { $set: true },
-      selectedStock: { $set: action.stockId }
-    });
-  },
-  [FEED_SUCCESS]: (state, action) => {
-    return update(state, {
-      feedLoading: { $set: false },
-      feedLoaded: { $push: [action.stockId] },
-      selectedStock: { $set: action.stockId },
-      socketError: { $set: null },
-      stocks: {
-        [action.stockId]: { $set: action.data }
-      }
+      loading: { $set: true },
+      selectedStockId: { $set: action.stockId }
     });
   },
   [INIT_STOCK]: (state, action) => {
     return update(state, {
-      feedLoading: { $set: false },
-      lastStocks: { $set : action.lastStocks },
+      loading: { $set: false },
       lastUpdate: { $set : action.lastUpdate },
-      socketError: { $set: action.data },
-      stocks: { $set: action.stocks }
+      market: { $set: action.market },
+      socketError: { $set: initialState.socketError },
+      stocks: { $set: action.stocks },
+      stockCache: { $set: action.stockCache }
     });
   },
   [SET_PROP]: (state, action) => {
@@ -65,8 +87,8 @@ const actionsMap = {
   },
   [SOCK_ERROR]: (state, action) => {
     return update(state, {
-      socketError: { $set: action.data },
-      feedLoading: { $set: false }
+      socketError: { $merge: action.data },
+      loading: { $set: false }
     });
   }
 };

@@ -1,178 +1,171 @@
 import events from 'events';
-import md5 from 'md5';
 import SocketIO from 'socket.io';
-import { get, server } from './http.js';
-import { getRedisHash, getRedisKeys, hgetallAsync, redisClient, scanAsync } from './redisCfg.js';
-import { getMarketStatus, getTimeToOpen, toMoment } from './dateUtils.js';
+import { getRedisHash } from './redis.js';
+import { server } from './http.js';
+import { getMarketStatus } from './dateUtils.js';
+import { sc } from './service.js';
 
-const eventEmitter = new events.EventEmitter();
+
+/**
+ * Node.js EventEmitter instance
+ * @see https://nodejs.org/dist/latest-v6.x/docs/api/events.html#events_class_eventemitter
+ */
+export const eventEmitter = new events.EventEmitter();
+
+/**
+ * Port is defined internally by Heroku at production
+ * @type {number} 8080 by default at development
+ */
 const port = process.env.PORT || 8080;
 server.listen(port);
+
 console.log(`Server running at port:${port}`);
 
-/**
-* stockControl object will help us out to deal with stocks flow
-* refCache is used to avoid dupes basically
-*/
-let stockControl = {
-  lastStocks: null,
-  lastUpdate: null,
-  refCache: null
-};
-redisClient.hgetall('__STOCK_CONTROL__', (err, stocksData) => {
-  if (err) throw new Error('Redis service error:', err);
-  if (stocksData) {
-    stockControl = stocksData;
-  }
-  // Once we are ready, we set the requesting clock and start requesting stock data asap
-  stockControl.apiIsWorking = false;
-  stockControl.interval = null;
-  stockControl.marketIsOpen = false;
-  getStocksFromApi();
-});
+
+// start service
+sc.init();
 
 /**
-* Timer manager for stocks request function
-* @return an interval
-*/
-const refreshStockInterval = (time = 60 * 1000) => {
-  console.log(`Time to getStocksFromApi set to ${time/1000} secs`);
-  clearInterval(stockControl.interval);
-  stockControl.interval = setInterval(getStocksFromApi, time);
-};
-
-const errorSimulation = () => {
-  // La API debera simular un 10% rate de errores usando el siguiente codigo:
-  if (Math.random(0, 1) < 0.1) throw new Error('How unfortunate! The API Request Failed')
-};
-
-// Stocks request function
-const getStocksFromApi = async (stockNames = ['AAPL','ABC','MSFT','TSLA','F']) => {
-
-  stockControl.marketIsOpen = getMarketStatus();
-  if (!stockControl.marketIsOpen && stockControl.apiIsWorking) {
-    stockControl.apiIsWorking = false;
-    eventEmitter.emit('stock:close');
-    // this would work better on a 'non-stop' enviroment: maybe not suitable for heroku free dynos
-    // const timeToOpen = getTimeToOpen();
-    // refreshStockInterval(timeToOpen);
-    // TODO: informar la usuario que no se va a actualizar mas hasta la proxima apertura.
-  } else if (stockControl.marketIsOpen && !stockControl.apiIsWorking) {
-    stockControl.apiIsWorking = true;
-    refreshStockInterval();
-  }
-
-  try {
-
-    errorSimulation();
-
-    const url = `http://finance.google.com/finance/info?client=ig&q=${stockNames.join(',')}`;
-    const stocks = await get(url);
-    // check if last response is different from current response
-    const lastStocks = JSON.stringify(stocks);
-    const refCache = md5(lastStocks);
-
-    if (stockControl.refCache !== refCache) {
-      stockControl.refCache = refCache;
-      // La data debera ser guardada en Redis,
-      // usando Hashes para cada stock y el timestamp (unix) para cada transaccion guardada.
-      const currentUpdate = new Date();
-      const unixTime = Math.floor(currentUpdate / 1000);
-      const lastUpdate = stockControl.lastUpdate ?
-        new Date(parseInt(stockControl.lastUpdate, 10) * 1000) : currentUpdate;
-      const hasToBeBackedUp = lastUpdate.getMonth() !== currentUpdate.getMonth();
-      const redisField = unixTime.toString();
-
-      stocks.forEach((stock) => {
-
-        const redisKey = `stock:${stock.id}`;
-        if (hasToBeBackedUp) {
-          const isoDate = lastUpdate.toISOString().split('-');
-          const backUpKey = `${isoDate[0]}${isoDate[1]}`;
-          redisClient.rename(redisKey, backUpKey);
-        }
-
-        const stockValues = Object.keys(stock).map((key) => { return stock[key] });
-        redisClient.hset(redisKey, redisField, JSON.stringify(stockValues));
-
-      });
-
-      redisClient.hset('__STOCK_CONTROL__', [
-        'lastUpdate', redisField, 'refCache', refCache, 'lastStocks', lastStocks
-      ]);
-      // emit new data asap
-      eventEmitter.emit('stock:add', {
-        'lastStocks': lastStocks,
-        'lastUpdate': unixTime
-      });
-    }
-
-  } catch (ex) {
-
-    // Se debera capturar SOLAMENTE este error para los reintentos
-    // si existe otro error (ej: se cayo el api) debera manejarse de otra manera
-    // (informandole al usuario la ultima actualizacion, que no existe conexion con el api, etc).
-    if (/unfortunate/.test(ex)) {
-      eventEmitter.emit('stock:error', { message: 'API request failed. Retrying in 5 seconds.' });
-      // this is needed for a border case: when retrying is beyond opening hours
-      stockControl.apiIsWorking = stockControl.marketIsOpen ? false : true;
-      refreshStockInterval(5 * 1000);
-    } else {
-      console.error(ex);
-      eventEmitter.emit('stock:error', { message: 'API connection unavailable.' });
-    }
-
-  }
-
-}
-
-// Socket.io stuff
+ * Socket.io server
+ * @type {Object}
+ * @see https://socket.io/docs/server-api/
+ */
 const io = new SocketIO(server);
 io.on('connection', (socket) => {
+
   console.log('CONNECTION');
+  console.log('market:', sc.market);
 
-  // border case: empty db -> emit socketError about no data
-  socket.on('stock:init', () => {
-    if (stockControl.marketIsOpen) {
-      if (!stockControl.lastUpdate) {
-        socket.emit('stock:error', { message: 'There is no available data at the moment.' });
-      } else {
-        console.log('send (first) Stock');
-        const initStock = {
-          'lastUpdate': stockControl.lastUpdate,
-          'lastStocks': stockControl.lastStocks
-        };
-        socket.emit('stock:init', initStock);
-      }
+  if (!sc.market.isOpen) {
+    sc.market = getMarketStatus();
+    socket.emit('stock:close', sc.market);
+  }
+
+  eventEmitter.on('stock:close', (market) => {
+    socket.emit('stock:close', market);
+  });
+
+  // feed immediately when new stock arrives from service Api
+  eventEmitter.on('stock:add', (data) => {
+    socket.emit('stock:add', data);
+  });
+
+  // or feed on request to new comers
+  socket.on('stock:add', () => {
+    if (!sc.lastUpdate) {
+      socket.emit('stock:error', { message: 'There is no available data at the moment.' });
     } else {
-      socket.emit('stock:close'); // market is closed
+      const data = {
+        'lastUpdate': sc.lastUpdate,
+        'stocks': sc.stocks
+      };
+      socket.emit('stock:add', data);
     }
-  });
-
-  eventEmitter.on('stock:close', () => {
-    socket.emit('stock:close');
-  });
-
-  // feed immediately when new stock arrives from Api
-  eventEmitter.on('stock:add', (newStock) => {
-    console.log('emitting!');
-    socket.emit('stock:add', newStock);
   });
 
   eventEmitter.on('stock:error', (error) => {
     socket.emit('stock:error', error);
   });
 
+  // send init data
+  socket.on('stock:init', () => {
+
+    // border case: empty db -> emit socketError about no data
+    if (!sc.lastUpdate) {
+
+      socket.emit('stock:error', { message: 'There is no available data at the moment.' });
+
+    } else {
+
+      const initStock = {
+        'lastUpdate': sc.lastUpdate,
+        'stockCache': sc.stocks,
+        'stocks': sc.stocks
+      };
+
+      socket.emit('stock:init', initStock, sc.market);
+      console.log('send init Stock');
+
+    }
+  });
+
   // send all data from selected stockId
-  socket.on('stock:feedStart', (stockId) => {
+  socket.on('stock:feedStart', (cacheSync) => {
     (async () => {
-      try {
-        const redisKey = `stock:${stockId}`;
+
+      const feedCache = async (redisKey) => {
         const redisHash = await getRedisHash(redisKey);
-        const data = { stocks: redisHash }
-        socket.emit('stock:feedSuccess', data, stockId);
+        const data = { stocks: redisHash };
+        if (redisHash.length === 0) {
+          socket.emit('stock:error', { message: 'There is no available data at the moment.' });
+        } else {
+          socket.emit('stock:feedCache', data, cacheSync);
+        }
+      };
+
+      const feedEnd = async () => {
+        console.log('feedEnd');
+        const data = await sc.getStockPreCache(cacheSync);
+        if (data.length === 0) {
+          socket.emit('stock:error', { message: 'There is no more available data at the moment.' });
+        } else {
+          socket.emit('stock:feedEnd', data, cacheSync);
+        }
+      };
+
+      try {
+
+        // send today data or archived data as needed
+        let redisKey = null;
+
+        if (!cacheSync.lastUpdate) {
+          // no cached data on client, we emit a queue with the next updates
+          cacheSync.next = await sc.getStockCacheKeys(cacheSync.stockId);
+        }
+
+        // next queue shrinks with each emit to be cached by the client
+        redisKey = cacheSync.next.shift();
+
+        if (redisKey) {
+          feedCache(redisKey);
+
+        } else {
+
+          // when queue is already empty we still need to do one more check
+          // lets say client visit us on monday and tuesday and then comes back on friday...
+          // first, let's check that at least one day has passed
+          if (Math.abs(cacheSync.lastUpdate - sc.lastUpdate) >= 24 * 60 * 60) {
+
+            const lastStockCacheKey = `stock:${cacheSync.stockId}:${cacheSync.lastUpdate}`;
+            const cacheKeys = await sc.getStockCacheKeys(cacheSync.stockId);
+            const lastCacheKey = cacheKeys.reverse()[0];
+
+            if (lastStockCacheKey !== lastCacheKey) {
+
+              // client has some cached data but needs some more
+              cacheSync.next = cacheKeys.slice(cacheKeys.indexOf(lastStockCacheKey) + 1);
+              redisKey = cacheSync.next.shift();
+              feedCache(redisKey);
+
+            } else {
+
+              // one or more days has passed but cache is up to date
+              feedEnd();
+
+            }
+
+          } else {
+
+            // ok, client is pretty much up to date
+            // so, we will emit just the last bits of pre cached data
+            feedEnd();
+
+          }
+
+        }
+
       } catch (e) {
-        // console.error('socketError:', e);
+        console.error('socketError:', e);
         socket.emit('stock:error', { message: 'This service is not available at the moment.' });
       }
     })();
