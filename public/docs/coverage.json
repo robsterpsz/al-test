@@ -1,0 +1,32 @@
+{
+  "coverage": "100%",
+  "expectCount": 21,
+  "actualCount": 21,
+  "files": {
+    "src/dateUtils.js": {
+      "expectCount": 7,
+      "actualCount": 7,
+      "undocumentLines": []
+    },
+    "src/http.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "src/index.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/redis.js": {
+      "expectCount": 7,
+      "actualCount": 7,
+      "undocumentLines": []
+    },
+    "src/service.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    }
+  }
+}
