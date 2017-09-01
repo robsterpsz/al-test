@@ -17,8 +17,8 @@ import {
 } from '../actions/app.js';
 
 const connect = () => {
-  const ip = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8080';
-  const socket = io(ip);
+  //const ip = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8080';
+  const socket = io();
   return new Promise(resolve => {
     socket.on('connect', () => {
       resolve(socket);
