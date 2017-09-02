@@ -2,7 +2,7 @@
   "name": "altest",
   "version": "1.0.0",
   "description": "AL task made for testing purposes",
-  "main": "/server/index.js",
+  "main": "./server/index.js",
   "scripts": {
     "build": "npm run build:client && npm run build:docs && npm run build:server",
     "build:client": "npm run clean && NODE_ENV=\"production\" webpack",
@@ -14,7 +14,7 @@
     "dev:client": "webpack-dashboard -t 'RobsterLabs' -- webpack-dev-server",
     "dev:server": "nodemon src/index.js --exec babel-node",
     "preview": "npm run clean && NODE_ENV=\"production\" webpack-dev-server",
-    "start": "node /server/index.js",
+    "start": "node ./server/index.js",
     "test": "mocha --compilers js:babel-register"
   },
   "repository": {
