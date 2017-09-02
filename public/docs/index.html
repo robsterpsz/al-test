@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl">
+  <title data-ice="title">Home | altest</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="AL task made for testing purposes"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="altest"><meta property="twitter:description" content="AL task made for testing purposes"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/robsterpsz/al-test"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getApiTimeZone">getApiTimeZone</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMarketStatus">getMarketStatus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toLocal">toLocal</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toMoment">toMoment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get">get</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getRedisHash">getRedisHash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getRedisKeys">getRedisKeys</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hgetallAsync">hgetallAsync</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-scanAsync">scanAsync</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-server">server</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-eventEmitter">eventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-redisClient">redisClient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sc">sc</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="al-task">AL TASK</h1><h2 id="what-is-this-">What is this?</h2><p>A test project to demonstrate a React client served by Node.js (with ES6 via babel) with Redis DB and Socket.io, to be deployed at Heroku.</p>
+<p>At this stage React is using redux-saga to handle socket.io.</p>
+<h2 id="details-for-this-version">Details for this version</h2><p>All branches pushed in the public repo are meant to be run on their own and are fully functional, so you can take a peek on my ramblings about code.</p>
+<p>This is how state is looking as I&apos;m thinking about the tiniest possible state:</p>
+<p><img src="https://image.ibb.co/fZcaHQ/Screenshot_20170825_142548.png" alt="state"></p>
+<p>I am also testing different approaches to get a balanced performance on web client. </p>
+<p>This time I&apos;m using arrays instead of flatten array-like objects, both for &apos;static&apos; cached data and &apos;volatile&apos; data, and I will keep watching how it performs... not bad so far.</p>
+<h2 id="changelog-">CHANGELOG:</h2><ul>
+<li>Persistence for web client, thanks to redux-persist.</li>
+<li>Basic sync flow for data caching on a daily basis.</li>
+<li>Webpack config for node.</li>
+<li>Esdoc to publish html node docs.</li>
+<li>Added a timer saga to be run after market closes.</li>
+<li>New timer on network error simulation.</li>
+</ul>
+<h2 id="todo-">TODO:</h2><ul>
+<li>Provide history directly from URL, REST style.</li>
+<li>Manage traffic from a third party API.</li>
+<li>Graphic display: add a clock component, charts and some fancy styles.</li>
+<li>Make tests.</li>
+<li>Keep thinking about the best way to manage state.</li>
+</ul>
+<h3 id="requirements">Requirements</h3><ul>
+<li>NodeJS HTTP Server (without any framework)  6.11.0</li>
+<li>Redis                                       4.0.1</li>
+<li>React                                       15.6.1</li>
+<li>socket.io                                   2.0.3</li>
+<li>Babel (ES6)                                 6.24.1</li>
+</ul>
+<h5 id="install-">Install:</h5><pre><code class="lang-bash"><code class="source-code prettyprint">git clone https://github.com/robsterpsz/al-test.git
+cd altest
+npm install</code>
+</code></pre>
+<h5 id="you-should-run-on-dev-mode-">You should run on dev mode:</h5><p>To get the node server up and running:</p>
+<pre><code class="lang-bash"><code class="source-code prettyprint">###############################################################
+npm run dev:server
+###############################################################</code>
+</code></pre>
+<p>In a separate console, to get the web client running:</p>
+<pre><code class="lang-bash"><code class="source-code prettyprint">###############################################################
+npm run dev:client # or simply: npm run dev 
+###############################################################</code>
+</code></pre>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.1)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

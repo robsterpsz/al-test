@@ -1,0 +1,1279 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/dateUtils.js",
+    "content": "import moment from 'moment';\nimport time from 'time';\nimport tz from 'timezone/loaded';\n\n/**\n * used to convert a date into a normalized strftime format with timezone\n * @type {String}\n */\nconst strftime_format = '%F %T %z';\n/**\n * moment.js LDML format for parsing date strings\n * @type {String}\n */\nconst moment_format = 'YYYY-MM-DD HH:mm:ss zz';\n\n/**\n * Convert a Javascript Date into node-time wrapper with the appropriate timezone.\n * @param {Date} date Javascript Date object\n * @param {String} timezone  Olson timezone for this date (e.g. 'America/New_York')\n * @return {node-time} object with the appropriate timezone\n */\nexport const toLocal = (date, timezone) => {\n  const tz_date = new time.Date(date);\n  tz_date.setTimezone(timezone); // localize the date into the specified timezone\n  return tz(tz_date, strftime_format, timezone); // localized format w timezone offset\n};\n\n/**\n * Convert a Javascript Date into a Moment.js moment obj with the appropriate timezone.\n * Using the returned moment, you can call for example 'moment.calendar()' to get a\n * human readable relative time such as 'last Friday at 3:52 PM'.\n * @param {Date} date Javascript Date object\n * @param {String} timezone Olson timezone for this date (e.g. 'America/New_York')\n * @return {Object} MomentJS object with the appropriate timezone\n */\nexport const toMoment = (date, timezone) => {\n  const local_datetime = toLocal(date, timezone);\n  return moment(local_datetime, moment_format);\n};\n\n/**\n * Get market current datetime.\n * @return {Object} Moment.js object with market timezone\n */\nexport const getApiTimeZone = () => {\n  return toMoment(new Date(), 'America/New_York');\n};\n\n// /**\n// * Nasdaq & NYSE open at 09:30 and close at 16:00 EDT from Monday to Friday.\n// * @return {Object} a Moment.js duration object indicating time left to open trade market\n// */\n// export const getTimeToOpen = () => {\n//   const apiTimezone = getApiTimeZone();\n//   const day = apiTimezone.day();\n//   const hour = apiTimezone.hour();\n//   let refDate = toMoment(new Date(), 'America/New_York');\n//   refDate.set({'hour': 9, 'minute': 30, 'second': 0, 'millisecond': 0});\n//   if (day === 6) {\n//     refDate.add(2, 'days');\n//   } else if (day === 5 && hour > 15) {\n//     refDate.add(3, 'days');\n//   } else if (day === 0 || hour > 15) {\n//     refDate.add(1, 'days');\n//   }\n//   return Math.abs(refDate.diff(apiTimezone));\n// };\n\n/**\n* Idicates if market is open and returns market current datetime as well.\n* @return {Object<boolean, number>}\n* @property {boolean} isOpen true when market is open\n* @property {number} time unix timestamp corresponding to market datetime\n*/\nexport const getMarketStatus = () => {\n  const apiTime = getApiTimeZone();\n  const openingDay = apiTime.day();\n  let isOpen = openingDay > 0 && openingDay < 6;\n  if (isOpen) {\n    const openingHour = apiTime.hour();\n    isOpen = openingHour * 60 < 959;\n    if (isOpen) {\n      const minutes = apiTime.minutes();\n      isOpen = openingHour * 60 + minutes > 569;\n    }\n  }\n  return { isOpen: isOpen, time: apiTime.unix() };\n};\n",
+    "static": true,
+    "longname": "/home/robert/dev/altest/src/dateUtils.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "variable",
+    "name": "strftime_format",
+    "memberof": "src/dateUtils.js",
+    "static": true,
+    "longname": "src/dateUtils.js~strftime_format",
+    "access": "public",
+    "export": false,
+    "importPath": "altest/src/dateUtils.js",
+    "importStyle": null,
+    "description": "used to convert a date into a normalized strftime format with timezone",
+    "lineNumber": 9,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 50,
+    "kind": "variable",
+    "name": "moment_format",
+    "memberof": "src/dateUtils.js",
+    "static": true,
+    "longname": "src/dateUtils.js~moment_format",
+    "access": "public",
+    "export": false,
+    "importPath": "altest/src/dateUtils.js",
+    "importStyle": null,
+    "description": "moment.js LDML format for parsing date strings",
+    "lineNumber": 14,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "function",
+    "name": "toLocal",
+    "memberof": "src/dateUtils.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/dateUtils.js~toLocal",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/dateUtils.js",
+    "importStyle": "{toLocal}",
+    "description": "Convert a Javascript Date into node-time wrapper with the appropriate timezone.",
+    "lineNumber": 22,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Date"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "date",
+        "description": "Javascript Date object"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "timezone",
+        "description": "Olson timezone for this date (e.g. 'America/New_York')"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "node-time"
+      ],
+      "spread": false,
+      "description": "object with the appropriate timezone"
+    }
+  },
+  {
+    "__docId__": 52,
+    "kind": "function",
+    "name": "toMoment",
+    "memberof": "src/dateUtils.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/dateUtils.js~toMoment",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/dateUtils.js",
+    "importStyle": "{toMoment}",
+    "description": "Convert a Javascript Date into a Moment.js moment obj with the appropriate timezone.\nUsing the returned moment, you can call for example 'moment.calendar()' to get a\nhuman readable relative time such as 'last Friday at 3:52 PM'.",
+    "lineNumber": 36,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Date"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "date",
+        "description": "Javascript Date object"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "timezone",
+        "description": "Olson timezone for this date (e.g. 'America/New_York')"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "MomentJS object with the appropriate timezone"
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "function",
+    "name": "getApiTimeZone",
+    "memberof": "src/dateUtils.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/dateUtils.js~getApiTimeZone",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/dateUtils.js",
+    "importStyle": "{getApiTimeZone}",
+    "description": "Get market current datetime.",
+    "lineNumber": 45,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "Moment.js object with market timezone"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 54,
+    "kind": "function",
+    "name": "getMarketStatus",
+    "memberof": "src/dateUtils.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/dateUtils.js~getMarketStatus",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/dateUtils.js",
+    "importStyle": "{getMarketStatus}",
+    "description": "Idicates if market is open and returns market current datetime as well.",
+    "lineNumber": 75,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "isOpen",
+        "description": "true when market is open"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "time",
+        "description": "unix timestamp corresponding to market datetime"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object<boolean, number>"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 55,
+    "kind": "file",
+    "name": "src/http.js",
+    "content": "import fs from 'fs';\nimport http from 'http';\nimport path from 'path';\n\n\n/**\n * Basic Node.js web server\n * @see https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_http_createserver_requestlistener\n */\nexport const server = http.createServer((req, res) => {\n  const checkMimeType = true;\n  const filename = req.url == '/' ? '/index.html' : req.url;\n  const ext = path.extname(filename);\n  console.log('__dirname', __dirname);\n  // const defaultFile = path.join(__dirname, 'public/index.html');\n  const defaultFile = 'public/index.html';\n  // let publicPath = path.join(__dirname, 'public');\n  let publicPath = 'public';\n  const validExtensions = {\n    '.css': 'text/css',\n    '.gif': 'image/gif',\n    '.html' : 'text/html',\n    '.ico' : 'image/x-icon',\n    '.jpg': 'image/jpeg',\n    '.js': 'application/javascript',\n    '.png': 'image/png',\n    '.svg': 'image/svg+xml',\n    '.txt': 'text/plain',\n    '.woff': 'application/font-woff',\n    '.woff2': 'application/font-woff2'\n  };\n\n  const getFile = (localPath, res, mimeType) => {\n    console.log('getFile', localPath, mimeType);\n    fs.readFile(localPath, function(err, contents) {\n      if(!err) {\n        res.setHeader('Content-Length', contents.length);\n        if (mimeType != undefined) {\n          res.setHeader('Content-Type', mimeType);\n        }\n        res.statusCode = 200;\n        res.end(contents);\n      } else {\n        console.log('getFile err', err);\n        res.writeHead(500);\n        res.end();\n      }\n    });\n  };\n\n  let validMimeType = true;\n  const mimeType = validExtensions[ext];\n\n  if (checkMimeType) {\n    validMimeType = validExtensions[ext] != undefined;\n  }\n\n  if (validMimeType) {\n    publicPath += filename;\n    fs.exists(publicPath, function(exists) {\n      if(exists) {\n        getFile(publicPath, res, mimeType);\n      } else {\n        res.setHeader('Location', '/');\n        getFile(defaultFile, res, 'text/html');\n      }\n    });\n  } else {\n    res.setHeader('Location', '/');\n    getFile(defaultFile, res, 'text/html');\n  }\n\n\n});\n\n\n/**\n * Promisyfied getter to gather (very similar to) json content from an url\n * @param  {String} url URL resource\n * @return {Object} JSON data\n * @see https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_http_get_options_callback\n */\nexport const get = (url) => {\n  return new Promise((resolve, reject) => {\n    http.get(url, (res) => {\n      const { statusCode } = res;\n\n      let error;\n      if (statusCode !== 200) {\n        error = new Error('Request Failed.\\n' +\n                          `Status Code: ${statusCode}`);\n      }\n      if (error) {\n        res.resume(); // consume response data to free up memory\n        reject(error.message);\n      }\n\n      let rawData = '';\n      res.setEncoding('utf8');\n      res.on('data', (chunk) => { rawData += chunk; });\n      res.on('end', () => {\n        try {\n          const fixedData = rawData.replace(/\\/\\/\\s/, ''); // fix response from google API\n          const parsedData = JSON.parse(fixedData);\n          resolve(parsedData);\n        } catch (ex) {\n          reject(ex);\n        }\n      });\n    }).on('error', (e) => {\n      reject(e.message);\n    });\n  });\n};\n",
+    "static": true,
+    "longname": "/home/robert/dev/altest/src/http.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 56,
+    "kind": "variable",
+    "name": "server",
+    "memberof": "src/http.js",
+    "static": true,
+    "longname": "src/http.js~server",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/http.js",
+    "importStyle": "{server}",
+    "description": "Basic Node.js web server",
+    "see": [
+      "https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_http_createserver_requestlistener"
+    ],
+    "lineNumber": 10,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "function",
+    "name": "get",
+    "memberof": "src/http.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/http.js~get",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/http.js",
+    "importStyle": "{get}",
+    "description": "Promisyfied getter to gather (very similar to) json content from an url",
+    "see": [
+      "https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_http_get_options_callback"
+    ],
+    "lineNumber": 83,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "url",
+        "description": "URL resource"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "JSON data"
+    }
+  },
+  {
+    "__docId__": 58,
+    "kind": "file",
+    "name": "src/index.js",
+    "content": "import events from 'events';\nimport SocketIO from 'socket.io';\nimport { getRedisHash } from './redis.js';\nimport { server } from './http.js';\nimport { getMarketStatus } from './dateUtils.js';\nimport { sc } from './service.js';\nimport 'babel-core/register';\nimport 'babel-polyfill';\n\n/**\n * Node.js EventEmitter instance\n * @see https://nodejs.org/dist/latest-v6.x/docs/api/events.html#events_class_eventemitter\n */\nexport const eventEmitter = new events.EventEmitter();\n\n/**\n * Port is defined internally by Heroku at production\n * @type {number} 8080 by default at development\n */\nconst port = process.env.PORT || 8080;\nserver.listen(port);\n\nconsole.log(`Server running at port:${port}`);\n\n\n// start service\nsc.init();\n\n/**\n * Socket.io server\n * @type {Object}\n * @see https://socket.io/docs/server-api/\n */\nconst io = new SocketIO(server);\nio.on('connection', (socket) => {\n\n  console.log('CONNECTION');\n  console.log('market:', sc.market);\n\n  if (!sc.market.isOpen) {\n    sc.market = getMarketStatus();\n    socket.emit('stock:close', sc.market);\n  }\n\n  eventEmitter.on('stock:close', (market) => {\n    socket.emit('stock:close', market);\n  });\n\n  // feed immediately when new stock arrives from service Api\n  eventEmitter.on('stock:add', (data) => {\n    socket.emit('stock:add', data);\n  });\n\n  // or feed on request to new comers\n  socket.on('stock:add', () => {\n    if (!sc.lastUpdate) {\n      socket.emit('stock:error', { message: 'There is no available data at the moment.' });\n    } else {\n      const data = {\n        'lastUpdate': sc.lastUpdate,\n        'stocks': sc.stocks\n      };\n      socket.emit('stock:add', data);\n    }\n  });\n\n  eventEmitter.on('stock:error', (error) => {\n    socket.emit('stock:error', error);\n  });\n\n  // send init data\n  socket.on('stock:init', () => {\n\n    // border case: empty db -> emit socketError about no data\n    if (!sc.lastUpdate) {\n\n      socket.emit('stock:error', { message: 'There is no available data at the moment.' });\n\n    } else {\n\n      const initStock = {\n        'lastUpdate': sc.lastUpdate,\n        'stockCache': sc.stocks,\n        'stocks': sc.stocks\n      };\n\n      socket.emit('stock:init', initStock, sc.market);\n      console.log('send init Stock');\n\n    }\n  });\n\n  // send all data from selected stockId\n  socket.on('stock:feedStart', (cacheSync) => {\n    (async () => {\n\n      const feedCache = async (redisKey) => {\n        const redisHash = await getRedisHash(redisKey);\n        const data = { stocks: redisHash };\n        if (redisHash.length === 0) {\n          socket.emit('stock:error', { message: 'There is no available data at the moment.' });\n        } else {\n          socket.emit('stock:feedCache', data, cacheSync);\n        }\n      };\n\n      const feedEnd = async () => {\n        console.log('feedEnd');\n        const data = await sc.getStockPreCache(cacheSync);\n        if (data.length === 0) {\n          socket.emit('stock:error', { message: 'There is no more available data at the moment.' });\n        } else {\n          socket.emit('stock:feedEnd', data, cacheSync);\n        }\n      };\n\n      try {\n\n        // send today data or archived data as needed\n        let redisKey = null;\n\n        if (!cacheSync.lastUpdate) {\n          // no cached data on client, we emit a queue with the next updates\n          cacheSync.next = await sc.getStockCacheKeys(cacheSync.stockId);\n        }\n\n        // next queue shrinks with each emit to be cached by the client\n        redisKey = cacheSync.next.shift();\n\n        if (redisKey) {\n\n          feedCache(redisKey);\n\n        } else {\n\n          // when queue is already empty we still need to do one more check\n          // lets say client visit us on monday and tuesday and then comes back on friday...\n          // first, let's check that at least one day has passed\n          if (Math.abs(cacheSync.lastUpdate - sc.lastUpdate) >= 24 * 60 * 60) {\n\n            const lastStockCacheKey = `stock:${cacheSync.stockId}:${cacheSync.lastUpdate}`;\n            const cacheKeys = await sc.getStockCacheKeys(cacheSync.stockId);\n            const lastCacheKey = cacheKeys.reverse()[0];\n\n            if (lastStockCacheKey !== lastCacheKey) {\n\n              // client has some cached data but needs some more\n              cacheSync.next = cacheKeys.slice(cacheKeys.indexOf(lastStockCacheKey) + 1);\n              redisKey = cacheSync.next.shift();\n              feedCache(redisKey);\n\n            } else {\n\n              // one or more days has passed but cache is up to date\n              feedEnd();\n\n            }\n\n          } else {\n\n            // ok, client is pretty much up to date\n            // so, we will emit just the last bits of pre cached data\n            feedEnd();\n\n          }\n\n        }\n\n      } catch (e) {\n        console.error('socketError:', e);\n        socket.emit('stock:error', { message: 'This service is not available at the moment.' });\n      }\n    })();\n  });\n\n  socket.on('disconnect', () => {\n    console.log('DISCONNECT');\n  });\n});\n",
+    "static": true,
+    "longname": "/home/robert/dev/altest/src/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 59,
+    "kind": "variable",
+    "name": "eventEmitter",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~eventEmitter",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/index.js",
+    "importStyle": "{eventEmitter}",
+    "description": "Node.js EventEmitter instance",
+    "see": [
+      "https://nodejs.org/dist/latest-v6.x/docs/api/events.html#events_class_eventemitter"
+    ],
+    "lineNumber": 14,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 60,
+    "kind": "variable",
+    "name": "port",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~port",
+    "access": "public",
+    "export": false,
+    "importPath": "altest/src/index.js",
+    "importStyle": null,
+    "description": "Port is defined internally by Heroku at production",
+    "lineNumber": 20,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "variable",
+    "name": "io",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~io",
+    "access": "public",
+    "export": false,
+    "importPath": "altest/src/index.js",
+    "importStyle": null,
+    "description": "Socket.io server",
+    "see": [
+      "https://socket.io/docs/server-api/"
+    ],
+    "lineNumber": 34,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 62,
+    "kind": "file",
+    "name": "src/redis.js",
+    "content": "import bluebird from 'bluebird';\nimport redis  from 'redis';\n\n// import lie from 'lie'; // recycled from localforage dependency\n// lie.all([redis.RedisClient.prototype]);\nbluebird.promisifyAll(redis.RedisClient.prototype);\n\n/**\n * redisPort is defined internally by Heroku\n * @type {Number} 6379 by default\n * @see https://redis.io/topics/config\n */\nconst redisPort = process.env.REDIS_PORT || 6379;\n/**\n * redisHost is defined internally by Heroku\n * @type {String} '127.0.0.1' by default\n * @see https://redis.io/topics/config\n */\nconst redisHost = process.env.REDIS_HOST || '127.0.0.1';\n\n/**\n * Redis client for Node.js\n * @see http://redis.js.org/#api-rediscreateclient\n */\nexport const redisClient = redis.createClient(redisPort, redisHost);\nredisClient.on('error', function (e) {\n  console.error('redisClient Error:', e);\n});\n\n/**\n * Returns all fields and values of the hash stored at key.\n * @param  {String} keyName Redis hash key name\n * @return {Array <String>} Every field name followed by its corresponding value\n * @see https://redis.io/commands/hgetall\n */\nexport const hgetallAsync = (keyName) => {\n  const data = redisClient.hgetallAsync(keyName)\n    .then((data) => { return data; })\n    .catch((e) => { throw e; });\n  return data;\n};\n\n/**\n * Get all fields and their associated values from a Redis hash.\n * @param  {Number} cursor Redis cursor\n * @param  {String} pattern Redis (regex) pattern\n * @param  {Set} returnSet Javascript set being queued recursively\n * @return {Array <String>} Every field value pair stored in the Redis hash\n * @see https://redis.io/commands/hscan\n */\nexport const scanAsync = (cursor, pattern, returnSet) => {\n  return redisClient.scanAsync(cursor, 'MATCH', pattern, 'COUNT', '100').then(\n    (reply) => {\n      cursor = reply[0];\n      const keys = reply[1];\n      keys.forEach((key) => { returnSet.add(key); });\n      if (cursor === '0') {\n        return Array.from(returnSet);\n      } else {\n        return scanAsync(cursor, pattern, returnSet);\n      }\n    }).catch((e) => { throw e; });\n};\n\n/**\n * Asyn function that get all fields and their associated values from a Redis hash.\n * @param  {String} keyPattern Redis (regex) pattern.\n * @return {String} redisKeys Hash Redis key\n */\nexport const getRedisKeys = async (keyPattern) => {\n  const keys = new Set();\n  const redisKeys = await scanAsync('0', keyPattern, keys)\n    .then((result) =>{ return result; })\n    .catch((e) => { throw e; });\n  return redisKeys;\n};\n\n/**\n * Async function that returns all fields and values of the hash stored at key.\n * @param  {String} redisKey Key name of the Redis hash\n * @return {Array <String>} All field value pairs stored in the Redis hash\n */\nexport const getRedisHash = async (redisKey) => {\n  const redisHash = await hgetallAsync(redisKey)\n    .then((hash) => { return hash; })\n    .catch((e) => { throw e; });\n  return redisHash;\n};\n",
+    "static": true,
+    "longname": "/home/robert/dev/altest/src/redis.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 63,
+    "kind": "variable",
+    "name": "redisPort",
+    "memberof": "src/redis.js",
+    "static": true,
+    "longname": "src/redis.js~redisPort",
+    "access": "public",
+    "export": false,
+    "importPath": "altest/src/redis.js",
+    "importStyle": null,
+    "description": "redisPort is defined internally by Heroku",
+    "see": [
+      "https://redis.io/topics/config"
+    ],
+    "lineNumber": 13,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 64,
+    "kind": "variable",
+    "name": "redisHost",
+    "memberof": "src/redis.js",
+    "static": true,
+    "longname": "src/redis.js~redisHost",
+    "access": "public",
+    "export": false,
+    "importPath": "altest/src/redis.js",
+    "importStyle": null,
+    "description": "redisHost is defined internally by Heroku",
+    "see": [
+      "https://redis.io/topics/config"
+    ],
+    "lineNumber": 19,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 65,
+    "kind": "variable",
+    "name": "redisClient",
+    "memberof": "src/redis.js",
+    "static": true,
+    "longname": "src/redis.js~redisClient",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/redis.js",
+    "importStyle": "{redisClient}",
+    "description": "Redis client for Node.js",
+    "see": [
+      "http://redis.js.org/#api-rediscreateclient"
+    ],
+    "lineNumber": 25,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 66,
+    "kind": "function",
+    "name": "hgetallAsync",
+    "memberof": "src/redis.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/redis.js~hgetallAsync",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/redis.js",
+    "importStyle": "{hgetallAsync}",
+    "description": "Returns all fields and values of the hash stored at key.",
+    "see": [
+      "https://redis.io/commands/hgetall"
+    ],
+    "lineNumber": 36,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "keyName",
+        "description": "Redis hash key name"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Array <String>"
+      ],
+      "spread": false,
+      "description": "Every field name followed by its corresponding value"
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "function",
+    "name": "scanAsync",
+    "memberof": "src/redis.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/redis.js~scanAsync",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/redis.js",
+    "importStyle": "{scanAsync}",
+    "description": "Get all fields and their associated values from a Redis hash.",
+    "see": [
+      "https://redis.io/commands/hscan"
+    ],
+    "lineNumber": 51,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "cursor",
+        "description": "Redis cursor"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pattern",
+        "description": "Redis (regex) pattern"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Set"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "returnSet",
+        "description": "Javascript set being queued recursively"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Array <String>"
+      ],
+      "spread": false,
+      "description": "Every field value pair stored in the Redis hash"
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "function",
+    "name": "getRedisKeys",
+    "memberof": "src/redis.js",
+    "generator": false,
+    "async": true,
+    "static": true,
+    "longname": "src/redis.js~getRedisKeys",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/redis.js",
+    "importStyle": "{getRedisKeys}",
+    "description": "Asyn function that get all fields and their associated values from a Redis hash.",
+    "lineNumber": 70,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "keyPattern",
+        "description": "Redis (regex) pattern."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": "redisKeys Hash Redis key"
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "function",
+    "name": "getRedisHash",
+    "memberof": "src/redis.js",
+    "generator": false,
+    "async": true,
+    "static": true,
+    "longname": "src/redis.js~getRedisHash",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/redis.js",
+    "importStyle": "{getRedisHash}",
+    "description": "Async function that returns all fields and values of the hash stored at key.",
+    "lineNumber": 83,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "redisKey",
+        "description": "Key name of the Redis hash"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Array <String>"
+      ],
+      "spread": false,
+      "description": "All field value pairs stored in the Redis hash"
+    }
+  },
+  {
+    "__docId__": 70,
+    "kind": "file",
+    "name": "src/service.js",
+    "content": "import md5 from 'md5';\nimport { eventEmitter } from './index.js';\nimport { get } from './http.js';\nimport { getMarketStatus } from './dateUtils.js';\nimport { getRedisKeys, redisClient } from './redis.js';\n\n/**\n* sc object controls stock data flow\n*/\nexport const sc = {\n  addStockCacheKeys(stockId, key) {\n    if (sc.stockCacheKeys && sc.stockCacheKeys[stockId]) {\n      sc.stockCacheKeys[stockId].push(key);\n    } else {\n      sc.stockCacheKeys[stockId] = [key];\n    }\n    return sc.lastStockCacheKey = key;\n  },\n  errorSimulation() {\n    // La API debera simular un 10% rate de errores usando el siguiente codigo:\n    if (Math.random(0, 1) < 0.1) throw new Error('How unfortunate! The API Request Failed');\n  },\n  async getStockCacheKeys (stockId) {\n    const keys = sc.stockCacheKeys && sc.stockCacheKeys[stockId]\n      && sc.stockCacheKeys[stockId].length > 0;\n    let result = null;\n    if (!keys) {\n      const cacheKeys = await getRedisKeys(`stock:${stockId}:*`);\n      sc.stockCacheKeys[stockId] = cacheKeys.sort();\n      result = sc.stockCacheKeys[stockId];\n    } else {\n      result = sc.stockCacheKeys[stockId];\n    }\n    return result;\n  },\n  getStockPreCache (cacheSync) {\n    return sc.preCache[cacheSync.stockId].filter((data) => {\n      return parseInt(data[0], 10) > cacheSync.lastUpdate;\n    });\n  },\n  init: async () => {\n    redisClient.hgetall('__STOCK_CONTROL__', (err, stocksData) => {\n      if (err) throw new Error('Redis service error:', err);\n      if (stocksData) {\n        sc.dupeControl = stocksData.dupeControl;\n        sc.lastUpdate = parseInt(stocksData.lastUpdate, 10);\n        sc.stocks = JSON.parse(stocksData.stocks);\n      }\n    });\n    const keys = await sc.getStockCacheKeys('*');\n    keys.forEach((key) => {\n      const stockId = key.split(':')[1];\n      sc.preCache[stockId] = [];\n    });\n    return getStocksFromApi();\n  },\n  refreshStockInterval (time = 60 * 1000, fn = getStocksFromApi) {\n    clearInterval(this.stockInterval);\n    this.stockInterval = setInterval(fn, time);\n    console.log(`Time to getStocksFromApi set to ${time/1000} secs`);\n  },\n  apiIsWorking: false,      // needed to set interval time to default (60 seconds) after sim error\n  dupeControl: null,        // to avoid dupes on incoming data\n  lastStockCacheKey: null,  // cheaper comparison param to perform feeding\n  lastUpdate: null,         // used as comparer param and ref name in redis keys\n  market: {},               // when market is closed client is not served at all\n  preCache: {},             // used to save traffic quota on free redis cloud services\n  stockCacheKeys: {},       // memoizing redis keys for each stock to emit cached data\n  stockInterval: null,      // request stock data every 60 secs or 5 secs when retrying\n  stocks: {}                // just the very last stock data, to be emitted as it arrives\n};\n\n/**\n* getStocksFromApi requests stocks data, then saves and emits\n* @param stockNames {Array} Contains a list of stock names\n* @return true\n*/\nconst getStocksFromApi = async (stockNames = ['AAPL','ABC','MSFT','TSLA','F']) => {\n\n  sc.market = getMarketStatus();\n\n  if (!sc.market.isOpen && sc.apiIsWorking) {\n\n    sc.apiIsWorking = false;\n    eventEmitter.emit('stock:close', sc.market);\n\n    // this would work better on a 'non-stop' enviroment: not suitable with heroku free dyno\n    // const timeToOpen = getTimeToOpen();\n    // refreshStockInterval(timeToOpen);\n    // TODO: informar la usuario que no se va a actualizar mas hasta la proxima apertura.\n\n  } else if (sc.market.isOpen && !sc.apiIsWorking) {\n\n    sc.apiIsWorking = true;\n    sc.refreshStockInterval();\n\n  }\n\n  try {\n\n    sc.errorSimulation();\n\n    const url = `http://finance.google.com/finance/info?client=ig&q=${stockNames.join(',')}`;\n    const rawStocks = await get(url);\n\n    // check if last response is different from current response\n    // const lastStocks = JSON.stringify(rawStocks);\n    const dupeControl = md5(JSON.stringify(rawStocks));\n\n    if (sc.dupeControl !== dupeControl) {\n      sc.dupeControl = dupeControl;\n\n      // La data debera ser guardada en Redis,\n      // usando Hashes para cada stock y el timestamp (unix) para cada transaccion guardada.\n\n      let hasToBeArchived = false;\n      const currentUpdate = new Date();\n      if (sc.lastUpdate) {\n        const lastUpdateDate = new Date(sc.lastUpdate * 1000);\n        hasToBeArchived = lastUpdateDate.getDate() !== currentUpdate.getDate();\n      }\n\n      const unixTime = Math.floor(currentUpdate / 1000);\n      const lastUpdate = unixTime.toString();\n\n      rawStocks.forEach((stock) => {\n\n        const redisKey = `stock:${stock.id}`;\n\n        if (hasToBeArchived) {\n          sc.preCache[stock.id] = [];\n          const archiveKey = `stock:${stock.id}:${sc.lastUpdate}`;\n          sc.addStockCacheKeys(stock.id, archiveKey);\n          redisClient.rename(redisKey, archiveKey);\n        }\n\n        const stockValues = Object.keys(stock).map((key) => {\n          const value = key === 'id' ? lastUpdate : stock[key];\n          return value;\n        });\n\n        redisClient.hset(redisKey, lastUpdate, JSON.stringify(stockValues));\n\n        sc.stocks[stock.id] = [stockValues];\n\n        if (sc.preCache && sc.preCache[stock.id]) {\n          sc.preCache[stock.id].push(stockValues);\n        } else {\n          sc.preCache[stock.id] = [stockValues];\n        }\n\n      });\n\n      redisClient.hset('__STOCK_CONTROL__', [\n        'dupeControl', dupeControl,\n        'lastUpdate', lastUpdate,\n        'stocks', JSON.stringify(sc.stocks)\n      ]);\n\n      sc.lastUpdate = unixTime;\n\n      // emit new data\n      eventEmitter.emit('stock:add', {\n        'lastUpdate': unixTime,\n        'stocks': sc.stocks\n      });\n    }\n\n    return true;\n\n  } catch (ex) {\n\n    // Se debera capturar SOLAMENTE este error para los reintentos\n    // si existe otro error (ej: se cayo el api) debera manejarse de otra manera\n    // (informandole al usuario la ultima actualizacion, que no existe conexion con el api, etc).\n\n    if (/unfortunate/.test(ex)) {\n\n      // this was needed for a border case: when retrying was beyond opening hours\n      // and we still wanted to keep serving data\n      sc.apiIsWorking = sc.market.isOpen ? false : true;\n      const retryMs = 30;\n      sc.refreshStockInterval(retryMs * 1000);\n\n      eventEmitter.emit('stock:error', {\n        active: true,\n        message: `API request error simulation: retrying in ${retryMs} seconds.`,\n        value: retryMs\n      });\n\n    } else {\n\n      console.error(ex);\n      eventEmitter.emit('stock:error', { message: 'API connection unavailable.' });\n\n    }\n  }\n};\n",
+    "static": true,
+    "longname": "/home/robert/dev/altest/src/service.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 71,
+    "kind": "variable",
+    "name": "sc",
+    "memberof": "src/service.js",
+    "static": true,
+    "longname": "src/service.js~sc",
+    "access": "public",
+    "export": true,
+    "importPath": "altest/src/service.js",
+    "importStyle": "{sc}",
+    "description": "sc object controls stock data flow",
+    "lineNumber": 10,
+    "type": {
+      "types": [
+        "{\"addStockCacheKeys\": function, \"errorSimulation\": function, \"getStockCacheKeys\": function, \"getStockPreCache\": function, \"init\": *, \"refreshStockInterval\": function, \"apiIsWorking\": *, \"dupeControl\": *, \"lastStockCacheKey\": *, \"lastUpdate\": *, \"market\": *, \"preCache\": *, \"stockCacheKeys\": *, \"stockInterval\": *, \"stocks\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 72,
+    "kind": "function",
+    "name": "getStocksFromApi",
+    "memberof": "src/service.js",
+    "generator": false,
+    "async": true,
+    "static": true,
+    "longname": "src/service.js~getStocksFromApi",
+    "access": "public",
+    "export": false,
+    "importPath": "altest/src/service.js",
+    "importStyle": null,
+    "description": "getStocksFromApi requests stocks data, then saves and emits",
+    "lineNumber": 78,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "stockNames",
+        "description": "{Array} Contains a list of stock names"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "true"
+    },
+    "ignore": true
+  },
+  {
+    "kind": "index",
+    "content": "# AL TASK\n\n## What is this?\nA test project to demonstrate a React client served by Node.js (with ES6 via babel) with Redis DB and Socket.io, to be deployed at Heroku.\n\nAt this stage React is using redux-saga to handle socket.io.\n\n## Details for this version\nAll branches pushed in the public repo are meant to be run on their own and are fully functional, so you can take a peek on my ramblings about code.\n\nThis is how state is looking as I'm thinking about the tiniest possible state:\n\n![state](https://image.ibb.co/fZcaHQ/Screenshot_20170825_142548.png)\n\nI am also testing different approaches to get a balanced performance on web client. \n\nThis time I'm using arrays instead of flatten array-like objects, both for 'static' cached data and 'volatile' data, and I will keep watching how it performs... not bad so far.\n\n## CHANGELOG:\n* Persistence for web client, thanks to redux-persist.\n* Basic sync flow for data caching on a daily basis.\n* Webpack config for node.\n* Esdoc to publish html node docs.\n* Added a timer saga to be run after market closes.\n* New timer on network error simulation.\n\n## TODO:\n* Provide history directly from URL, REST style.\n* Manage traffic from a third party API.\n* Graphic display: add a clock component, charts and some fancy styles.\n* Make tests.\n* Keep thinking about the best way to manage state.\n\n### Requirements\n* NodeJS HTTP Server (without any framework)  6.11.0\n* Redis                                       4.0.1\n* React                                       15.6.1\n* socket.io                                   2.0.3\n* Babel (ES6)                                 6.24.1\n\n##### Install:\n```bash\ngit clone https://github.com/robsterpsz/al-test.git\ncd altest\nnpm install\n```\n\n##### You should run on dev mode:\n\nTo get the node server up and running:\n```bash\n###############################################################\nnpm run dev:server\n###############################################################\n```\n\nIn a separate console, to get the web client running:\n```bash\n###############################################################\nnpm run dev:client # or simply: npm run dev \n###############################################################\n```",
+    "longname": "/home/robert/dev/altest/README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"altest\",\n  \"version\": \"1.0.0\",\n  \"description\": \"AL task made for testing purposes\",\n  \"main\": \"./server/index.js\",\n  \"scripts\": {\n    \"build\": \"npm run build:client && npm run build:docs && npm run build:server\",\n    \"build:client\": \"npm run clean && NODE_ENV=\\\"production\\\" webpack\",\n    \"build:docs\" : \"./node_modules/.bin/esdoc\",\n    \"build:server\": \"NODE_ENV=\\\"production\\\" webpack --config webpack.node.config.js\",\n    \"check\": \"NODE_ENV=\\\"production\\\" webpack-dev-server\",\n    \"clean\": \"rm -rf ./public\",\n    \"dev\": \"webpack-dev-server\",\n    \"dev:client\": \"webpack-dashboard -t 'RobsterLabs' -- webpack-dev-server\",\n    \"dev:server\": \"nodemon src/index.js --exec babel-node\",\n    \"preview\": \"npm run clean && NODE_ENV=\\\"production\\\" webpack-dev-server\",\n    \"start\": \"node ./server/index.js\",\n    \"test\": \"mocha --compilers js:babel-register\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/robsterpsz/al-test.git\"\n  },\n  \"engines\": {\n    \"node\": \"6.11.0\"\n  },\n  \"keywords\": [\n    \"testing\",\n    \"redis\",\n    \"node.js\",\n    \"react\",\n    \"socket.io\",\n    \"babel\",\n    \"es6\"\n  ],\n  \"author\": \"rinostroh@yahoo.com\",\n  \"license\": \"ISC\",\n  \"bugs\": {\n    \"url\": \"https://github.com/robsterpsz/al-test/issues\"\n  },\n  \"homepage\": \"https://github.com/robsterpsz/al-test#readme\",\n  \"devDependencies\": {\n    \"autoprefixer\": \"^7.1.2\",\n    \"babel-cli\": \"^6.24.1\",\n    \"babel-core\": \"^6.7.2\",\n    \"babel-eslint\": \"^7.2.3\",\n    \"babel-loader\": \"^7.1.1\",\n    \"babel-plugin-syntax-decorators\": \"^6.13.0\",\n    \"babel-plugin-transform-async-generator-functions\": \"^6.24.1\",\n    \"babel-plugin-transform-class-properties\": \"^6.6.0\",\n    \"babel-plugin-transform-decorators-legacy\": \"^1.3.4\",\n    \"babel-polyfill\": \"^6.23.0\",\n    \"babel-preset-es2015\": \"^6.24.1\",\n    \"babel-preset-react\": \"^6.5.0\",\n    \"babel-preset-react-optimize\": \"^1.0.1\",\n    \"babel-preset-stage-0\": \"^6.16.0\",\n    \"babel-register\": \"6.24.1\",\n    \"css-loader\": \"^0.28.4\",\n    \"es6-promise\": \"^4.1.1\",\n    \"esdoc\": \"^1.0.1\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.3.0\",\n    \"eslint-config-standard\": \"10.2.1\",\n    \"eslint-loader\": \"1.9.0\",\n    \"eslint-plugin-babel\": \"4.1.2\",\n    \"eslint-plugin-import\": \"^2.7.0\",\n    \"eslint-plugin-jsx-a11y\": \"^5.1.1\",\n    \"eslint-plugin-node\": \"5.1.1\",\n    \"eslint-plugin-promise\": \"3.5.0\",\n    \"eslint-plugin-react\": \"^7.1.0\",\n    \"eslint-plugin-standard\": \"3.0.1\",\n    \"extract-text-webpack-plugin\": \"^3.0.0\",\n    \"file-loader\": \"0.11.2\",\n    \"html-webpack-plugin\": \"^2.24.1\",\n    \"immutable\": \"^3.8.1\",\n    \"isomorphic-fetch\": \"^2.2.1\",\n    \"localforage\": \"^1.5.0\",\n    \"mocha\": \"3.5.0\",\n    \"node-sass\": \"^4.5.3\",\n    \"nodemon\": \"^1.11.0\",\n    \"postcss-loader\": \"^2.0.6\",\n    \"prop-types\": \"15.5.10\",\n    \"react\": \"15.6.1\",\n    \"react-addons-update\": \"^15.6.0\",\n    \"react-dom\": \"15.6.1\",\n    \"react-hot-loader\": \"^3.0.0-beta.7\",\n    \"react-redux\": \"5.0.5\",\n    \"react-router\": \"^4.1.1\",\n    \"react-router-dom\": \"^4.1.1\",\n    \"react-svg-loader\": \"^1.1.1\",\n    \"react-tap-event-plugin\": \"^2.0.1\",\n    \"redis\": \"^2.7.1\",\n    \"redux\": \"3.7.2\",\n    \"redux-logger\": \"^3.0.6\",\n    \"redux-persist\": \"^4.9.1\",\n    \"redux-persist-transform-filter\": \"0.0.15\",\n    \"redux-saga\": \"^0.15.6\",\n    \"resolve-url-loader\": \"2.1.0\",\n    \"sass-loader\": \"^6.0.6\",\n    \"socket.io-client\": \"^2.0.3\",\n    \"style-loader\": \"^0.18.2\",\n    \"svgo\": \"^0.7.2\",\n    \"svgo-loader\": \"^1.2.1\",\n    \"url-loader\": \"0.5.9\",\n    \"webpack\": \"^3.4.1\",\n    \"webpack-dashboard\": \"^0.4.0\",\n    \"webpack-dev-server\": \"^2.6.1\",\n    \"webpack-node-externals\": \"^1.6.0\"\n  },\n  \"dependencies\": {\n    \"babel-plugin-transform-runtime\": \"^6.23.0\",\n    \"babel-runtime\": \"^6.26.0\",\n    \"bluebird\": \"^3.5.0\",\n    \"foreman\": \"2.0.0\",\n    \"isomorphic-fetch\": \"^2.2.1\",\n    \"md5\": \"2.2.1\",\n    \"moment\": \"^2.18.1\",\n    \"socket.io\": \"^2.0.3\",\n    \"time\": \"^0.12.0\",\n    \"timezone\": \"^1.0.6\"\n  }\n}\n",
+    "longname": "/home/robert/dev/altest/package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

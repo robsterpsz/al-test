@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/index.js | altest</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="AL task made for testing purposes"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="altest"><meta property="twitter:description" content="AL task made for testing purposes"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/robsterpsz/al-test"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getApiTimeZone">getApiTimeZone</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMarketStatus">getMarketStatus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toLocal">toLocal</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toMoment">toMoment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get">get</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getRedisHash">getRedisHash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getRedisKeys">getRedisKeys</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hgetallAsync">hgetallAsync</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-scanAsync">scanAsync</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-server">server</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-eventEmitter">eventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-redisClient">redisClient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sc">sc</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import events from &apos;events&apos;;
+import SocketIO from &apos;socket.io&apos;;
+import { getRedisHash } from &apos;./redis.js&apos;;
+import { server } from &apos;./http.js&apos;;
+import { getMarketStatus } from &apos;./dateUtils.js&apos;;
+import { sc } from &apos;./service.js&apos;;
+import &apos;babel-core/register&apos;;
+import &apos;babel-polyfill&apos;;
+
+/**
+ * Node.js EventEmitter instance
+ * @see https://nodejs.org/dist/latest-v6.x/docs/api/events.html#events_class_eventemitter
+ */
+export const eventEmitter = new events.EventEmitter();
+
+/**
+ * Port is defined internally by Heroku at production
+ * @type {number} 8080 by default at development
+ */
+const port = process.env.PORT || 8080;
+server.listen(port);
+
+console.log(`Server running at port:${port}`);
+
+
+// start service
+sc.init();
+
+/**
+ * Socket.io server
+ * @type {Object}
+ * @see https://socket.io/docs/server-api/
+ */
+const io = new SocketIO(server);
+io.on(&apos;connection&apos;, (socket) =&gt; {
+
+  console.log(&apos;CONNECTION&apos;);
+  console.log(&apos;market:&apos;, sc.market);
+
+  if (!sc.market.isOpen) {
+    sc.market = getMarketStatus();
+    socket.emit(&apos;stock:close&apos;, sc.market);
+  }
+
+  eventEmitter.on(&apos;stock:close&apos;, (market) =&gt; {
+    socket.emit(&apos;stock:close&apos;, market);
+  });
+
+  // feed immediately when new stock arrives from service Api
+  eventEmitter.on(&apos;stock:add&apos;, (data) =&gt; {
+    socket.emit(&apos;stock:add&apos;, data);
+  });
+
+  // or feed on request to new comers
+  socket.on(&apos;stock:add&apos;, () =&gt; {
+    if (!sc.lastUpdate) {
+      socket.emit(&apos;stock:error&apos;, { message: &apos;There is no available data at the moment.&apos; });
+    } else {
+      const data = {
+        &apos;lastUpdate&apos;: sc.lastUpdate,
+        &apos;stocks&apos;: sc.stocks
+      };
+      socket.emit(&apos;stock:add&apos;, data);
+    }
+  });
+
+  eventEmitter.on(&apos;stock:error&apos;, (error) =&gt; {
+    socket.emit(&apos;stock:error&apos;, error);
+  });
+
+  // send init data
+  socket.on(&apos;stock:init&apos;, () =&gt; {
+
+    // border case: empty db -&gt; emit socketError about no data
+    if (!sc.lastUpdate) {
+
+      socket.emit(&apos;stock:error&apos;, { message: &apos;There is no available data at the moment.&apos; });
+
+    } else {
+
+      const initStock = {
+        &apos;lastUpdate&apos;: sc.lastUpdate,
+        &apos;stockCache&apos;: sc.stocks,
+        &apos;stocks&apos;: sc.stocks
+      };
+
+      socket.emit(&apos;stock:init&apos;, initStock, sc.market);
+      console.log(&apos;send init Stock&apos;);
+
+    }
+  });
+
+  // send all data from selected stockId
+  socket.on(&apos;stock:feedStart&apos;, (cacheSync) =&gt; {
+    (async () =&gt; {
+
+      const feedCache = async (redisKey) =&gt; {
+        const redisHash = await getRedisHash(redisKey);
+        const data = { stocks: redisHash };
+        if (redisHash.length === 0) {
+          socket.emit(&apos;stock:error&apos;, { message: &apos;There is no available data at the moment.&apos; });
+        } else {
+          socket.emit(&apos;stock:feedCache&apos;, data, cacheSync);
+        }
+      };
+
+      const feedEnd = async () =&gt; {
+        console.log(&apos;feedEnd&apos;);
+        const data = await sc.getStockPreCache(cacheSync);
+        if (data.length === 0) {
+          socket.emit(&apos;stock:error&apos;, { message: &apos;There is no more available data at the moment.&apos; });
+        } else {
+          socket.emit(&apos;stock:feedEnd&apos;, data, cacheSync);
+        }
+      };
+
+      try {
+
+        // send today data or archived data as needed
+        let redisKey = null;
+
+        if (!cacheSync.lastUpdate) {
+          // no cached data on client, we emit a queue with the next updates
+          cacheSync.next = await sc.getStockCacheKeys(cacheSync.stockId);
+        }
+
+        // next queue shrinks with each emit to be cached by the client
+        redisKey = cacheSync.next.shift();
+
+        if (redisKey) {
+
+          feedCache(redisKey);
+
+        } else {
+
+          // when queue is already empty we still need to do one more check
+          // lets say client visit us on monday and tuesday and then comes back on friday...
+          // first, let&apos;s check that at least one day has passed
+          if (Math.abs(cacheSync.lastUpdate - sc.lastUpdate) &gt;= 24 * 60 * 60) {
+
+            const lastStockCacheKey = `stock:${cacheSync.stockId}:${cacheSync.lastUpdate}`;
+            const cacheKeys = await sc.getStockCacheKeys(cacheSync.stockId);
+            const lastCacheKey = cacheKeys.reverse()[0];
+
+            if (lastStockCacheKey !== lastCacheKey) {
+
+              // client has some cached data but needs some more
+              cacheSync.next = cacheKeys.slice(cacheKeys.indexOf(lastStockCacheKey) + 1);
+              redisKey = cacheSync.next.shift();
+              feedCache(redisKey);
+
+            } else {
+
+              // one or more days has passed but cache is up to date
+              feedEnd();
+
+            }
+
+          } else {
+
+            // ok, client is pretty much up to date
+            // so, we will emit just the last bits of pre cached data
+            feedEnd();
+
+          }
+
+        }
+
+      } catch (e) {
+        console.error(&apos;socketError:&apos;, e);
+        socket.emit(&apos;stock:error&apos;, { message: &apos;This service is not available at the moment.&apos; });
+      }
+    })();
+  });
+
+  socket.on(&apos;disconnect&apos;, () =&gt; {
+    console.log(&apos;DISCONNECT&apos;);
+  });
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.1)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
