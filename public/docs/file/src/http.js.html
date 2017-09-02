@@ -58,7 +58,7 @@ import path from &apos;path&apos;;
  */
 export const server = http.createServer((req, res) =&gt; {
   const checkMimeType = true;
-  const filename = req.url.substr(-1) === &apos;/&apos; ? &apos;/index.html&apos; : req.url;
+  const filename = req.url === &apos;/&apos; ? &apos;/index.html&apos; : req.url;
   const ext = path.extname(filename);
   const defaultFile = &apos;public/index.html&apos;;
   let publicPath = &apos;public&apos;;

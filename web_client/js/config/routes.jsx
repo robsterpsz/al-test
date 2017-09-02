@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import About from 'components/About';
 import History from 'components/History';
@@ -11,6 +11,7 @@ const rootPath = '/';
 export const path = {
   stocks: rootPath,
   about: `${ rootPath }about`,
+  docs: `${ rootPath }docs`,
   history: `${ rootPath }history`
 };
 
@@ -18,6 +19,7 @@ export default () => (
   <Switch>
     <Route exact path={ rootPath } component={ Stocks } />
     <Route path={ path.about } component={ About } />
+    <Route path={ path.docs } render= { () => (<Redirect to={ rootPath } />) } />
     <Route path={ path.history } component={ History } />
     <Route path='*' component={ NotFound } />
   </Switch>

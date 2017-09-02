@@ -9,7 +9,7 @@ import path from 'path';
  */
 export const server = http.createServer((req, res) => {
   const checkMimeType = true;
-  const filename = req.url.substr(-1) === '/' ? '/index.html' : req.url;
+  const filename = req.url === '/' ? '/index.html' : req.url;
   const ext = path.extname(filename);
   const defaultFile = 'public/index.html';
   let publicPath = 'public';
