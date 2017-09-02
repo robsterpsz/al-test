@@ -2,7 +2,7 @@ const nodeExternals = require('webpack-node-externals');
 const path = require('path');
 const webpack = require('webpack');
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const NODE_ENV = process.env.NODE_ENV || 'production';
 
 const paths = {
   source: path.join(__dirname, './src'),
@@ -34,12 +34,12 @@ const plugins = [
       comparisons: true,
       conditionals: true,
       dead_code: true,
-      drop_console: false, //!SERVER_RENDER, // Keep server logs
+      drop_console: true,
       drop_debugger: true,
       evaluate: true,
       if_return: true,
       join_vars: true,
-      screw_ie8: true,
+      screw_ie8: false,
       sequences: true,
       unused: true,
       warnings: false,
@@ -70,7 +70,6 @@ module.exports = {
   entry,
   output: {
     path: paths.build,
-    publicPath: '/',
     filename: 'index.js'
   },
   module: {

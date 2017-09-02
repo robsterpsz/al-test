@@ -46,25 +46,25 @@ export const getApiTimeZone = () => {
   return toMoment(new Date(), 'America/New_York');
 };
 
-/**
-* Nasdaq & NYSE open at 09:30 and close at 16:00 EDT from Monday to Friday.
-* @return {Object} a Moment.js duration object indicating time left to open trade market
-*/
-export const getTimeToOpen = () => {
-  const apiTimezone = getApiTimeZone();
-  const day = apiTimezone.day();
-  const hour = apiTimezone.hour();
-  let refDate = toMoment(new Date(), 'America/New_York');
-  refDate.set({'hour': 9, 'minute': 30, 'second': 0, 'millisecond': 0});
-  if (day === 6) {
-    refDate.add(2, 'days');
-  } else if (day === 5 && hour > 15) {
-    refDate.add(3, 'days');
-  } else if (day === 0 || hour > 15) {
-    refDate.add(1, 'days');
-  }
-  return Math.abs(refDate.diff(apiTimezone));
-};
+// /**
+// * Nasdaq & NYSE open at 09:30 and close at 16:00 EDT from Monday to Friday.
+// * @return {Object} a Moment.js duration object indicating time left to open trade market
+// */
+// export const getTimeToOpen = () => {
+//   const apiTimezone = getApiTimeZone();
+//   const day = apiTimezone.day();
+//   const hour = apiTimezone.hour();
+//   let refDate = toMoment(new Date(), 'America/New_York');
+//   refDate.set({'hour': 9, 'minute': 30, 'second': 0, 'millisecond': 0});
+//   if (day === 6) {
+//     refDate.add(2, 'days');
+//   } else if (day === 5 && hour > 15) {
+//     refDate.add(3, 'days');
+//   } else if (day === 0 || hour > 15) {
+//     refDate.add(1, 'days');
+//   }
+//   return Math.abs(refDate.diff(apiTimezone));
+// };
 
 /**
 * Idicates if market is open and returns market current datetime as well.
