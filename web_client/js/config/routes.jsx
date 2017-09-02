@@ -19,7 +19,7 @@ export default () => (
   <Switch>
     <Route exact path={ rootPath } component={ Stocks } />
     <Route path={ path.about } component={ About } />
-    <Route path={ path.docs } render= { () => (<Redirect to={ rootPath } />) } />
+    <Route path={ path.docs } render= { () => (window.location.assign('/docs/index.html')) } />
     <Route path={ path.history } component={ History } />
     <Route path='*' component={ NotFound } />
   </Switch>
