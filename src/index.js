@@ -4,8 +4,6 @@ import { getRedisHash } from './redis.js';
 import { server } from './http.js';
 import { getMarketStatus } from './dateUtils.js';
 import { sc } from './service.js';
-import 'babel-core/register';
-import 'babel-polyfill';
 
 /**
  * Node.js EventEmitter instance
