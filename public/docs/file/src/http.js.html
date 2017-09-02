@@ -58,12 +58,9 @@ import path from &apos;path&apos;;
  */
 export const server = http.createServer((req, res) =&gt; {
   const checkMimeType = true;
-  const filename = req.url == &apos;/&apos; ? &apos;/index.html&apos; : req.url;
+  const filename = req.url.substr(-1) === &apos;/&apos; ? &apos;/index.html&apos; : req.url;
   const ext = path.extname(filename);
-  console.log(&apos;__dirname&apos;, __dirname);
-  // const defaultFile = path.join(__dirname, &apos;public/index.html&apos;);
   const defaultFile = &apos;public/index.html&apos;;
-  // let publicPath = path.join(__dirname, &apos;public&apos;);
   let publicPath = &apos;public&apos;;
   const validExtensions = {
     &apos;.css&apos;: &apos;text/css&apos;,
@@ -80,7 +77,6 @@ export const server = http.createServer((req, res) =&gt; {
   };
 
   const getFile = (localPath, res, mimeType) =&gt; {
-    console.log(&apos;getFile&apos;, localPath, mimeType);
     fs.readFile(localPath, function(err, contents) {
       if(!err) {
         res.setHeader(&apos;Content-Length&apos;, contents.length);
@@ -90,7 +86,6 @@ export const server = http.createServer((req, res) =&gt; {
         res.statusCode = 200;
         res.end(contents);
       } else {
-        console.log(&apos;getFile err&apos;, err);
         res.writeHead(500);
         res.end();
       }
