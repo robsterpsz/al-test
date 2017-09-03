@@ -23,7 +23,7 @@ function* marketTimer() {
 
       if (!cancel) {
         const timeZone = response;
-        apiTime -= timeZone.dstOffset;
+        apiTime += timeZone.dstOffset + timeZone.rawOffset;
       }
 
     } catch (e) {
