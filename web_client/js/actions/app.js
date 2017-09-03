@@ -3,7 +3,6 @@ export const CLOSE = 'app/stocks/CLOSE';
 export const FEED_CACHE = 'app/stocks/FEED_CACHE';
 export const FEED_END = 'app/stocks/FEED_END';
 export const FEED_START = 'app/stocks/FEED_START';
-export const FETCH = 'app/stocks/FETCH';
 export const INIT_STOCK = 'app/stocks/INIT_STOCK';
 export const SET_PROP = 'app/stocks/SET_PROP';
 export const SOCK_ERROR = 'app/stocks/SOCK_ERROR';

@@ -44,7 +44,7 @@ export default async() => {
     restoredState,
     compose(
       middleware,
-      //autoRehydrate()
+      autoRehydrate()
     )
   );
 
@@ -60,7 +60,7 @@ export default async() => {
   }
 
   // const persistor = createPersistor(store, persistConfig);
-  //persistStore(store, persistConfig);
+  persistStore(store, persistConfig);
 
   return store;
 };

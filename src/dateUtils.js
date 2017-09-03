@@ -67,7 +67,7 @@ export const getApiTimeZone = () => {
 // };
 
 /**
-* Idicates if market is open and returns market current datetime as well.
+* Indicates if market is open and returns market current datetime as well.
 * @return {Object<boolean, number>}
 * @property {boolean} isOpen true when market is open
 * @property {number} time unix timestamp corresponding to market datetime
