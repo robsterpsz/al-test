@@ -12,23 +12,20 @@ function* marketTimer() {
 
     let apiTime = Math.floor(new Date() / 1000);
 
-    try {
-      // get market timezone from google api
-      const url = `https://maps.googleapis.com/maps/api/timezone/json?location=40.71417,-74.00639&timestamp=${apiTime}&sensor=false`;
+    // get market timezone from google api
+    const url = `https://maps.googleapis.com/maps/api/timezone/json?location=40.71417,-74.00639&timestamp=${apiTime}&sensor=false`;
 
-      const { response, cancel } = yield race({
-        response: call(isoFetch, url),
-        cancel: setTimeout(() => { throw new Error('Server timeout'); }, 5000)
-      });
+    const { response } = yield race({
+      response: call(isoFetch, url),
+      cancel: setTimeout(() => { return true; }, 5000)
+    });
 
-      if (!cancel) {
-        const timeZone = response;
-        apiTime += timeZone.dstOffset + timeZone.rawOffset;
-      }
+    if (response) {
 
-    } catch (e) {
+      apiTime += response.dstOffset + response.rawOffset;
 
-      console.error(e);
+    } else {
+
       apiTime = action.market.time;
 
     }
